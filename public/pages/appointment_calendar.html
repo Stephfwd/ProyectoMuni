@@ -125,126 +125,20 @@
 
             <div class="recent-activity">
                 <div class="calendar-controls">
-                    <button class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
-                    <div class="calendar-title">Febrero 2026</div>
-                    <button class="btn btn-secondary">Siguiente <i class="fas fa-chevron-right"></i></button>
+                    <button id="prevMonth" class="btn btn-secondary"><i class="fas fa-chevron-left"></i>
+                        Anterior</button>
+                    <div id="calendarTitle" class="calendar-title">Febrero 2026</div>
+                    <button id="nextMonth" class="btn btn-secondary">Siguiente <i
+                            class="fas fa-chevron-right"></i></button>
                 </div>
 
-                <div class="calendar-grid">
-                    <!-- Headers -->
-                    <div class="calendar-header-day">Dom</div>
-                    <div class="calendar-header-day">Lun</div>
-                    <div class="calendar-header-day">Mar</div>
-                    <div class="calendar-header-day">Mié</div>
-                    <div class="calendar-header-day">Jue</div>
-                    <div class="calendar-header-day">Vie</div>
-                    <div class="calendar-header-day">Sáb</div>
-
-                    <!-- Days (Starting Feb 1 2026 is a Sunday) -->
-                    <div class="calendar-day">
-                        <span class="day-number">1</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">2</span>
-                        <div class="calendar-event">09:00 AM - C. Monge</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">3</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">4</span>
-                        <div class="calendar-event">11:00 AM - Reunión Dept.</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">5</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">6</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">7</span>
-                    </div>
-
-                    <!-- Week 2 -->
-                    <div class="calendar-day">
-                        <span class="day-number">8</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">9</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">10</span>
-                        <div class="calendar-event urgent">08:00 AM - Inspección</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">11</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">12</span>
-                        <div class="calendar-event">02:00 PM - M. Rojas</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">13</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">14</span>
-                    </div>
-
-                    <!-- Week 3 (Current Week) -->
-                    <div class="calendar-day">
-                        <span class="day-number">15</span>
-                    </div>
-                    <div class="calendar-day" style="background-color: #f0f9ff;">
-                        <span class="day-number" style="color: var(--primary-color);">16</span>
-                        <div class="calendar-event">08:30 AM - C. Monge</div>
-                        <div class="calendar-event">09:00 AM - M. Rojas</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">17</span>
-                        <div class="calendar-event">10:15 AM - R. Campos</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">18</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">19</span>
-                        <div class="calendar-event">11:00 AM - A. Gutiérrez</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">20</span>
-                        <div class="calendar-event">02:00 PM - L. Vargas</div>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">21</span>
-                    </div>
-
-                    <!-- Week 4 -->
-                    <div class="calendar-day">
-                        <span class="day-number">22</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">23</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">24</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">25</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">26</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">27</span>
-                    </div>
-                    <div class="calendar-day">
-                        <span class="day-number">28</span>
-                    </div>
+                <div id="calendarGrid" class="calendar-grid">
+                    <!-- El contenido se generará dinámicamente -->
                 </div>
             </div>
         </main>
     </div>
-
+    <script src="../js/appointmentcalendar.js"></script>
 </body>
 
 </html>

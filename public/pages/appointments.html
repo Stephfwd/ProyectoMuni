@@ -101,83 +101,22 @@
                 <table class="activity-table">
                     <thead>
                         <tr>
+                            <th>Fecha</th>
                             <th>Hora</th>
                             <th>Ciudadano</th>
                             <th>Trámite</th>
-                            <th>Departamento</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>08:30 AM</td>
-                            <td>Carlos Monge</td>
-                            <td>Permiso de Construcción</td>
-                            <td>Urbanismo</td>
-                            <td><span class="status active">Confirmada</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #27ae60;" title="Completar"><i
-                                        class="fas fa-check"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;" title="Cancelar"><i
-                                        class="fas fa-times"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>09:00 AM</td>
-                            <td>María Rojas</td>
-                            <td>Pago de Impuestos</td>
-                            <td>Cobros</td>
-                            <td><span class="status active">Confirmada</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #27ae60;" title="Completar"><i
-                                        class="fas fa-check"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;" title="Cancelar"><i
-                                        class="fas fa-times"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10:15 AM</td>
-                            <td>Roberto Campos</td>
-                            <td>Consulta Catastro</td>
-                            <td>Catastro</td>
-                            <td><span class="status pending">Pendiente</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #27ae60;" title="Completar"><i
-                                        class="fas fa-check"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;" title="Cancelar"><i
-                                        class="fas fa-times"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11:00 AM</td>
-                            <td>Ana Gutiérrez</td>
-                            <td>Bienestar Social</td>
-                            <td>Desarrollo Social</td>
-                            <td><span class="status closed">Cancelada</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #95a5a6;" title="Ver Detalle"><i
-                                        class="fas fa-eye"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02:00 PM</td>
-                            <td>Luis Vargas</td>
-                            <td>Licencia Comercial</td>
-                            <td>Patentes</td>
-                            <td><span class="status active">Confirmada</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #27ae60;" title="Completar"><i
-                                        class="fas fa-check"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;" title="Cancelar"><i
-                                        class="fas fa-times"></i></button>
-                            </td>
-                        </tr>
+                    <tbody id="appointmentsTableBody">
+                        <!-- Citas cargadas dinámicamente -->
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
+    <script src="../js/appoitments.js"></script>
 </body>
 
 </html>
