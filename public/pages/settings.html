@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Panel Administrativo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-brand">
+                    <i class="fas fa-landmark"></i> MuniPanel
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashadmin.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="users.html"><i class="fas fa-users"></i> Usuarios</a>
+                <a href="reports.html"><i class="fas fa-file-alt"></i> Reportes</a>
+                <a href="appointments.html"><i class="fas fa-calendar-check"></i> Citas</a>
+                <a href="settings.html" class="active"><i class="fas fa-cog"></i> Configuración</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-info">
+                        <div style="font-weight: 600;">Admin</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">admin@escazu.go.cr</div>
+                    </div>
+                </div>
+                <a href="index.html" class="btn btn-secondary btn-block"
+                    style="text-align: center; margin-top: 0.5rem;"><i class="fas fa-sign-out-alt"></i> Cerrar
+                    Sesión</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Configuración del Sistema</h1>
+                    <p class="dashboard-date">Personaliza el sistema y administra tus preferencias.</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <!-- Settings Form Mockup -->
+                <h2>Perfil de Administrador</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nombre Completo</label>
+                        <input type="text" value="Administrador Principal"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Correo
+                            Electrónico</label>
+                        <input type="email" value="admin@escazu.go.cr"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Teléfono</label>
+                        <input type="tel" value="2288-0000"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Departamento</label>
+                        <select style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                            <option>Tecnologías de Información</option>
+                            <option>Recursos Humanos</option>
+                            <option>Alcaldía</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h2>Seguridad</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Contraseña
+                            Actual</label>
+                        <input type="password" placeholder="********"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div></div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nueva Contraseña</label>
+                        <input type="password" placeholder="********"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Confirmar Nueva
+                            Contraseña</label>
+                        <input type="password" placeholder="********"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+
+                <h2>Notificaciones</h2>
+                <div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <input type="checkbox" checked style="margin-right: 1rem; width: 20px; height: 20px;">
+                        <label>Recibir notificaciones por correo electrónico</label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <input type="checkbox" style="margin-right: 1rem; width: 20px; height: 20px;">
+                        <label>Recibir notificaciones SMS</label>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Usuario - Panel Administrativo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-brand">
+                    <i class="fas fa-landmark"></i> MuniPanel
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashadmin.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="users.html" class="active"><i class="fas fa-users"></i> Usuarios</a>
+                <a href="reports.html"><i class="fas fa-file-alt"></i> Reportes</a>
+                <a href="appointments.html"><i class="fas fa-calendar-check"></i> Citas</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Configuración</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-info">
+                        <div style="font-weight: 600;">Admin</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">admin@escazu.go.cr</div>
+                    </div>
+                </div>
+                <a href="index.html" class="btn btn-secondary btn-block"
+                    style="text-align: center; margin-top: 0.5rem;"><i class="fas fa-sign-out-alt"></i> Cerrar
+                    Sesión</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Crear Nuevo Usuario</h1>
+                    <p class="dashboard-date">Ingresa la información del nuevo usuario.</p>
+                </div>
+                <div>
+                    <a href="users.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <form onsubmit="handleUser(event)"> <!-- Using GET to simulate submission and return to list -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nombre
+                                Completo</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Correo
+                                Electrónico</label>
+                            <input type="email" id="email" name="email" required placeholder="juan.perez@ejemplo.com"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label for="telefono"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 8888-8888"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label for="rol" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Rol de
+                                Usuario</label>
+                            <select id="rol" name="rol"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="ciudadano">Ciudadano</option>
+                                <option value="funcionario">Funcionario</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="password"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Contraseña
+                                Temporal</label>
+                            <input type="password" id="password" name="password" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label for="estado"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Estado</label>
+                            <select id="estado" name="estado"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="pendiente">Pendiente de Verificación</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; padding-top: 1.5rem; text-align: right;">
+                        <a href="users.html" class="btn btn-secondary" style="margin-right: 0.5rem;">Cancelar</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar
+                            Usuario</button>
+                    </div>
+                </form>
+                <script src="../js/app.js"></script>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

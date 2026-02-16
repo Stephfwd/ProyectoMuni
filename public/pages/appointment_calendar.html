@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Citas - Panel Administrativo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #e2e8f0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .calendar-header-day {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .calendar-day {
+            background: white;
+            min-height: 120px;
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: #fcfcfc;
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #718096;
+        }
+
+        .calendar-event {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .calendar-event.urgent {
+            background: #e74c3c;
+        }
+
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-brand">
+                    <i class="fas fa-landmark"></i> MuniPanel
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashadmin.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="users.html"><i class="fas fa-users"></i> Usuarios</a>
+                <a href="reports.html"><i class="fas fa-file-alt"></i> Reportes</a>
+                <a href="appointments.html" class="active"><i class="fas fa-calendar-check"></i> Citas</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Configuración</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-info">
+                        <div style="font-weight: 600;">Admin</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">admin@escazu.go.cr</div>
+                    </div>
+                </div>
+                <a href="index.html" class="btn btn-secondary btn-block"
+                    style="text-align: center; margin-top: 0.5rem;"><i class="fas fa-sign-out-alt"></i> Cerrar
+                    Sesión</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Calendario de Actividades</h1>
+                    <p class="dashboard-date">Vista mensual de citas y eventos.</p>
+                </div>
+                <div>
+                    <a href="appointment_form.html" class="btn btn-primary"><i class="fas fa-plus"></i> Agendar</a>
+                    <a href="appointments.html" class="btn btn-secondary"><i class="fas fa-list"></i> Vista Lista</a>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <div class="calendar-controls">
+                    <button class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                    <div class="calendar-title">Febrero 2026</div>
+                    <button class="btn btn-secondary">Siguiente <i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="calendar-grid">
+                    <!-- Headers -->
+                    <div class="calendar-header-day">Dom</div>
+                    <div class="calendar-header-day">Lun</div>
+                    <div class="calendar-header-day">Mar</div>
+                    <div class="calendar-header-day">Mié</div>
+                    <div class="calendar-header-day">Jue</div>
+                    <div class="calendar-header-day">Vie</div>
+                    <div class="calendar-header-day">Sáb</div>
+
+                    <!-- Days (Starting Feb 1 2026 is a Sunday) -->
+                    <div class="calendar-day">
+                        <span class="day-number">1</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">2</span>
+                        <div class="calendar-event">09:00 AM - C. Monge</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">3</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">4</span>
+                        <div class="calendar-event">11:00 AM - Reunión Dept.</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">5</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">6</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">7</span>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="calendar-day">
+                        <span class="day-number">8</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">9</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">10</span>
+                        <div class="calendar-event urgent">08:00 AM - Inspección</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">11</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">12</span>
+                        <div class="calendar-event">02:00 PM - M. Rojas</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">13</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">14</span>
+                    </div>
+
+                    <!-- Week 3 (Current Week) -->
+                    <div class="calendar-day">
+                        <span class="day-number">15</span>
+                    </div>
+                    <div class="calendar-day" style="background-color: #f0f9ff;">
+                        <span class="day-number" style="color: var(--primary-color);">16</span>
+                        <div class="calendar-event">08:30 AM - C. Monge</div>
+                        <div class="calendar-event">09:00 AM - M. Rojas</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">17</span>
+                        <div class="calendar-event">10:15 AM - R. Campos</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">18</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">19</span>
+                        <div class="calendar-event">11:00 AM - A. Gutiérrez</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">20</span>
+                        <div class="calendar-event">02:00 PM - L. Vargas</div>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">21</span>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="calendar-day">
+                        <span class="day-number">22</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">23</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">24</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">25</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">26</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">27</span>
+                    </div>
+                    <div class="calendar-day">
+                        <span class="day-number">28</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
