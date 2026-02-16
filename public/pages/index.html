@@ -1,14 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Municipalidad de Escazú - Inicio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <!-- Font Awesome for Icons (using CDN for simplicity/no-js) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-    <h1>holaaaaaaaaaaa</h1>
 
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-landmark"></i> MuniEscazú
+            </a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="#">Trámites</a>
+                <a href="#">La Muni</a>
+                <a href="#">Contacto</a>
+                <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
+            </div>
+        </div>
+    </nav>
 
-    <a href="otraPag.html">abc</a>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Bienvenidos al Portal Municipal</h1>
+            <p>Trabajando juntos por un cantón más seguro, limpio y ordenado.</p>
+            <a href="#servicios" class="btn btn-primary">Ver Servicios</a>
+            <a href="register.html" class="btn btn-secondary">Registrarse</a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trámites y Servicios</h2>
+                <p>Realice sus gestiones desde la comodidad de su hogar</p>
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Pago de Impuestos</h3>
+                    <p>Consulte y realice el pago de sus impuestos municipales en línea.</p>
+                    <a href="#" class="btn btn-secondary">Acceder</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <h3>Permisos de Construcción</h3>
+                    <p>Solicite y consulte el estado de sus permisos de obra.</p>
+                    <a href="#" class="btn btn-secondary">Acceder</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Agenda de Citas</h3>
+                    <p>Reserve su espacio para atención presencial en nuestras oficinas.</p>
+                    <a href="#" class="btn btn-secondary">Acceder</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-trash-alt"></i></div>
+                    <h3>Recolección de Residuos</h3>
+                    <p>Consulte los horarios y rutas de recolección en su barrio.</p>
+                    <a href="#" class="btn btn-secondary">Acceder</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Noticias Recientes</h2>
+            </div>
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-image">
+                        <i class="fas fa-image fa-3x"></i>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">16 Feb, 2026</div>
+                        <h3>Mejoras en el Parque Central</h3>
+                        <p>Inician las obras de remodelación y embellecimiento de las zonas verdes.</p>
+                        <a href="#">Leer más &rarr;</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <i class="fas fa-image fa-3x"></i>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">14 Feb, 2026</div>
+                        <h3>Campaña de Vacunación</h3>
+                        <p>Jornada de vacunación contra la influenza para adultos mayores este fin de semana.</p>
+                        <a href="#">Leer más &rarr;</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <i class="fas fa-image fa-3x"></i>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">10 Feb, 2026</div>
+                        <h3>Reciclaje Electrónico</h3>
+                        <p>Deposite sus residuos electrónicos en los puntos autorizados durante todo el mes.</p>
+                        <a href="#">Leer más &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Tiene alguna consulta?</h2>
+            <p>Nuestro equipo de soporte está disponible para ayudarle con sus trámites.</p>
+            <a href="#" class="btn btn-secondary">Contáctenos</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MuniEscazú</h3>
+                    <p>Comprometidos con el desarrollo y bienestar de nuestra comunidad.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Trámites</a></li>
+                        <li><a href="#">Transparencia</a></li>
+                        <li><a href="#">Directorio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Escazú, San José</li>
+                        <li><i class="fas fa-phone"></i> 2208-7500</li>
+                        <li><i class="fas fa-envelope"></i> info@escazu.go.cr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Municipalidad de Escazú. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>

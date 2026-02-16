@@ -1,0 +1,15 @@
+Comando para inicializar el proyecto 
+Creación del archivo package.json
+    npm init -y
+
+En caso de obtener un error con el comando anterior ejecutar lo siguiente:
+    Abrir PowerShell como admin
+    Colocar el siguiente comando: Set-ExecutionPolicy RemoteSigned
+
+Comando para descargar todas las dependecias del proyecto
+Creación de nodemodules y package-log.json
+    npm install express
+    npm i
+
+Comando para levantar el servidor y poder usarlo:
+    npm start
