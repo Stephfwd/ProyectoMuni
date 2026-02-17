@@ -59,7 +59,7 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3>1,250</h3>
+                        <h3 id="users-total">0</h3>
                         <p>Total Usuarios</p>
                     </div>
                     <div class="stat-icon users">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3>85</h3>
+                        <h3 id="users-new-today">0</h3>
                         <p>Nuevos hoy</p>
                     </div>
                     <div class="stat-icon growth">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3>15</h3>
+                        <h3 id="users-pending">0</h3>
                         <p>Pendientes Verificación</p>
                     </div>
                     <div class="stat-icon tasks">
@@ -106,67 +106,8 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>#USR-1001</td>
-                            <td>Carlos Monge</td>
-                            <td>carlos.monge@email.com</td>
-                            <td>Ciudadano</td>
-                            <td><span class="status active">Activo</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #3498db;"><i class="fas fa-edit"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#USR-1002</td>
-                            <td>María Rojas</td>
-                            <td>maria.rojas@email.com</td>
-                            <td>Ciudadano</td>
-                            <td><span class="status active">Activo</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #3498db;"><i class="fas fa-edit"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#USR-1003</td>
-                            <td>Roberto Campos</td>
-                            <td>roberto.campos@email.com</td>
-                            <td>Admin</td>
-                            <td><span class="status active">Activo</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #3498db;"><i class="fas fa-edit"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#USR-1004</td>
-                            <td>Ana Gutiérrez</td>
-                            <td>ana.gutierrez@email.com</td>
-                            <td>Ciudadano</td>
-                            <td><span class="status closed">Inactivo</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #3498db;"><i class="fas fa-edit"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#USR-1005</td>
-                            <td>Luis Vargas</td>
-                            <td>luis.vargas@email.com</td>
-                            <td>Funcionario</td>
-                            <td><span class="status active">Activo</span></td>
-                            <td>
-                                <button class="btn-icon" style="color: #3498db;"><i class="fas fa-edit"></i></button>
-                                <button class="btn-icon" style="color: #e74c3c;"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                    <tbody id="users-table-body">
+                        <!-- Content populated by JS -->
                     </tbody>
                 </table>
                 <!-- Pagination Mockup -->
@@ -179,6 +120,7 @@
         </main>
     </div>
 
+    <script src="../js/app.js"></script>
 </body>
 
 </html>

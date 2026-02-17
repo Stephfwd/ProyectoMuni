@@ -56,7 +56,8 @@
             </div>
 
             <div class="recent-activity">
-            
+
+                <form onsubmit="handleAppointment(event)">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                         <div>
                             <label for="ciudadano"
@@ -74,6 +75,19 @@
                                 <option value="patente">Solicitud de Patente</option>
                                 <option value="catastro">Consulta Catastral</option>
                                 <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="departamento"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Departamento</label>
+                            <select id="departamento" name="departamento"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="Urbanismo">Urbanismo</option>
+                                <option value="Cobros">Cobros</option>
+                                <option value="Catastro">Catastro</option>
+                                <option value="Desarrollo Social">Desarrollo Social</option>
+                                <option value="Patentes">Patentes</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                         <div>
@@ -101,7 +115,8 @@
                         <button type="submit" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Agendar
                             Cita</button>
                     </div>
-               
+                </form>
+
                 <script src="../js/app.js"></script>
             </div>
         </main>

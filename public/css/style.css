@@ -1,17 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-    --primary-color: #003366; /* Deep blue from Escazu logo/theme */
-    --secondary-color: #0055a5; /* Lighter blue */
-    --accent-color: #e6b800; /* Gold/Yellow accent */
-    --text-color: #333;
-    --bg-color: #f4f7f6;
+    /* Modern Color Palette */
+    --primary-color: #0f172a;
+    /* Slate 900 - Deep, professional dark blue */
+    --primary-light: #1e293b;
+    /* Slate 800 */
+    --secondary-color: #3b82f6;
+    /* Blue 500 - Vibrant action color */
+    --secondary-hover: #2563eb;
+    /* Blue 600 */
+    --accent-color: #f59e0b;
+    /* Amber 500 - Warm accent */
+    --success-color: #10b981;
+    /* Emerald 500 */
+    --danger-color: #ef4444;
+    /* Red 500 */
+    --text-color: #334155;
+    /* Slate 700 - Softer than pure black */
+    --text-light: #64748b;
+    /* Slate 500 */
+    --bg-color: #f1f5f9;
+    /* Slate 100 - Very light grey/blue tint */
     --white: #ffffff;
-    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* Typography */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
-    --border-radius: 8px;
-    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    /* UI Elements */
+    --border-radius: 12px;
+    --border-radius-sm: 6px;
+    --border-radius-lg: 20px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -25,16 +60,29 @@ html {
 }
 
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    line-height: 1.2;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    transition: color 0.3s ease;
+    transition: var(--transition);
 }
 
 ul {
@@ -51,45 +99,66 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
+    width: 100%;
 }
 
+/* Buttons */
 .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    font-family: var(--font-heading);
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: var(--transition);
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
 }
 
 .btn-primary:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-hover);
     transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(59, 130, 246, 0.3);
 }
 
 .btn-secondary {
-    background-color: var(--white);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
 }
 
 .btn-secondary:hover {
-    background-color: var(--bg-color);
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-block {
+    display: flex;
+    width: 100%;
 }
 
 /* Navbar */
 .navbar {
-    background-color: var(--white);
-    box-shadow: var(--shadow);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .navbar .container {
@@ -100,37 +169,57 @@ img {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--primary-color);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    /* Increase gap slightly */
+    padding: 0.5rem 0;
+    /* Add visual breathing room */
+}
+
+.logo img {
+    height: 60px;
+    /* Slightly larger for better visibility */
+    width: auto;
+    object-fit: contain;
+    /* Removed mix-blend-mode as the new image is likely transparent */
+    display: block;
 }
 
 .nav-links {
     display: flex;
     gap: var(--spacing-md);
+    align-items: center;
 }
 
 .nav-links a {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-color);
     position: relative;
+    font-size: 0.95rem;
 }
 
-.nav-links a::after {
+.nav-links a:not(.btn)::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: -4px;
     left: 0;
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
     transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
-.nav-links a:hover::after {
+.nav-links a:not(.btn):hover {
+    color: var(--secondary-color);
+}
+
+.nav-links a:not(.btn):hover::after {
     width: 100%;
 }
 
@@ -138,13 +227,21 @@ img {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    gap: 5px;
+    gap: 6px;
+    padding: 0.5rem;
+    border-radius: 4px;
 }
 
 .hamburger span {
-    width: 25px;
+    width: 28px;
     height: 3px;
     background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Footer */
@@ -158,57 +255,109 @@ footer {
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .footer-column h3 {
-    margin-bottom: var(--spacing-sm);
-    color: var(--accent-color);
+    margin-bottom: var(--spacing-md);
+    color: var(--white);
+    font-size: 1.25rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-column h3::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin-top: 0.5rem;
+    border-radius: 2px;
+}
+
+.footer-column p {
+    color: #94a3b8;
 }
 
 .footer-column ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.footer-column a {
+    color: #cbd5e1;
 }
 
 .footer-column a:hover {
-    color: var(--accent-color);
+    color: var(--white);
+    padding-left: 4px;
+}
+
+.footer-column i {
+    width: 20px;
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
 }
 
 .copyright {
     text-align: center;
     padding-top: var(--spacing-md);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
+    color: #64748b;
 }
 
 /* Responsive Navbar */
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* In a real scenario without JS, we'd use a checkbox hack or just stack them, but for "no JS" requirement, simple stacking or just hiding is tricky. Let's make them visible on mobile as a stack or use the checkbox hack. */
-        /* Checkbox hack implementation for mobile menu would require HTML changes. 
-           For this "pure CSS" requirement, I'll make it stack or use :target if needed.
-           Let's just stack them for simplicity in "Basic Responsive".
-        */
+        display: none;
         position: absolute;
         top: 80px;
         left: 0;
         right: 0;
         background-color: var(--white);
         flex-direction: column;
-        padding: var(--spacing-sm);
-        box-shadow: var(--shadow);
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-lg);
         text-align: center;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    .navbar:hover .nav-links {
-        /* Simple hover menu for mobile if no JS? Or just show them inline on very small screens?
-           Actually, the prompt says "Diseño responsive básico". Stacking vertically is safer without JS.
-        */
-        display: flex;
+    .nav-links a {
+        display: block;
+        padding: 0.5rem 0;
+        width: 100%;
     }
-    
+
+    /* Fallback for "no-JS" requirement: 
+       Normally we'd use JS to toggle a class. 
+       Since I cannot edit JS logic but "navigation with more comfort" was requested, 
+       I will use the :focus-within hack or :target hack if I could edit HTML extensively.
+       Given constraints, I will leave it as "hover" for simple interaction or just display:none
+       and rely on user resizing. 
+       However, to make it "navegar con más comodidad", a visible menu is key.
+       I'll keep the hover behavior for the navbar container to show menu on mobile if touched/clicked (simulated hover).
+    */
+    .navbar:hover .nav-links,
+    .navbar:active .nav-links {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
+
     .hamburger {
         display: flex;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }

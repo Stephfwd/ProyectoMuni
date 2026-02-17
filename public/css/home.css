@@ -1,63 +1,107 @@
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.6)), url('https://escazu.go.cr/sites/default/files/styles/slider_principal/public/slider_principal/parque_escazu_0.jpg?itok=somehash');
-    /* Use a placeholder or general image if specific one fails. Gradient overlay ensures text readability. */
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%), url('https://escazu.go.cr/sites/default/files/styles/slider_principal/public/slider_principal/parque_escazu_0.jpg?itok=somehash');
     background-color: var(--primary-color);
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    background-attachment: fixed;
+    /* Parallax effect */
+    min-height: 70vh;
+    /* Taller hero */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--white);
-    padding: 0 var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to top, var(--bg-color), transparent);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-sm);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+    color: var(--white);
+    /* Ensure it's white despite global h1 styles */
 }
 
 .hero-content p {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-md);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    opacity: 0.9;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.hero-content .btn {
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    /* Larger buttons for hero */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Services / Info Grid */
 .services-section {
     padding: var(--spacing-lg) 0;
-    background-color: var(--white);
+    background-color: var(--bg-color);
 }
 
 .section-title {
     text-align: center;
     margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-title h2 {
     color: var(--primary-color);
     font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
     position: relative;
     display: inline-block;
 }
 
-.section-title h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--accent-color);
-    margin: 0.5rem auto 0;
+.section-title p {
+    color: var(--text-light);
+    font-size: 1.1rem;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-md);
 }
 
@@ -67,38 +111,79 @@
     box-shadow: var(--shadow);
     padding: var(--spacing-md);
     text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--secondary-color);
+    transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.3s ease;
-    border-top: 4px solid var(--secondary-color);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
 }
 
 .card-icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
+    width: 70px;
+    height: 70px;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    color: var(--secondary-color);
+    font-size: 1.75rem;
+    transition: var(--transition);
+}
+
+.card:hover .card-icon {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: rotateY(180deg);
 }
 
 .card h3 {
     margin-bottom: var(--spacing-sm);
-    color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 1.25rem;
 }
 
 .card p {
-    color: #666;
-    margin-bottom: var(--spacing-sm);
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+    /* Pushes button down */
 }
 
 /* News Section */
 .news-section {
     padding: var(--spacing-lg) 0;
+    background-color: var(--white);
 }
 
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--spacing-md);
 }
 
@@ -107,16 +192,33 @@
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.news-item:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .news-image {
-    height: 200px;
-    background-color: #ddd;
-    /* Placeholder for images */
+    height: 220px;
+    background-color: #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
+    color: #94a3b8;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-image i {
+    transition: var(--transition);
+}
+
+.news-item:hover .news-image i {
+    transform: scale(1.1);
+    color: var(--secondary-color);
 }
 
 .news-content {
@@ -124,31 +226,102 @@
 }
 
 .news-date {
-    font-size: 0.85rem;
-    color: #888;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .news-content h3 {
     margin-bottom: var(--spacing-sm);
     color: var(--primary-color);
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+.news-content p {
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-content a {
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.news-content a:hover {
+    gap: 0.5rem;
 }
 
 /* Call to Action */
 .cta-section {
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
     color: var(--white);
     padding: var(--spacing-lg) 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 1;
 }
 
 .cta-section h2 {
+    color: var(--white);
     margin-bottom: var(--spacing-sm);
+    font-size: 2rem;
 }
 
 .cta-section p {
     margin-bottom: var(--spacing-md);
-    max-width: 700px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.cta-section .btn-secondary {
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--primary-color);
+}
+
+.cta-section .btn-secondary:hover {
+    background-color: transparent;
+    color: var(--white);
+}
+
+/* Responsive specific adjustments */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
 }
