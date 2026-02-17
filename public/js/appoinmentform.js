@@ -1,4 +1,6 @@
-document.getElementById('appointmentForm').addEventListener('submit', function (e) {
+import { postCita } from './services/api.js';
+
+document.getElementById('appointmentForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const ciudadano = document.getElementById('ciudadano').value;
@@ -7,10 +9,7 @@ document.getElementById('appointmentForm').addEventListener('submit', function (
     const hora = document.getElementById('hora').value;
     const notas = document.getElementById('notas').value;
 
-    const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-
     const newAppointment = {
-        id: Date.now(),
         ciudadano,
         tramite,
         fecha,
@@ -19,9 +18,13 @@ document.getElementById('appointmentForm').addEventListener('submit', function (
         status: 'active'
     };
 
-    appointments.push(newAppointment);
-    localStorage.setItem('appointments', JSON.stringify(appointments));
+    try {
+        await postCita(newAppointment);
+        alert('¡Cita agendada correctamente en la base de datos!');
+        window.location.href = 'appointments.html';
 
-    alert('Cita agendada correctamente.');
-    window.location.href = 'appointments.html';
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error de conexión con el servidor.");
+    }
 });
