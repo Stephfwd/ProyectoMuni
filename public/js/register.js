@@ -8,7 +8,11 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
 
     // Validación básica
     if (password !== confirmPassword) {
-        alert('Las contraseñas no coinciden');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Contraseñas no coinciden',
+            text: 'Por favor, verifique que ambas contraseñas sean iguales'
+        });
         return;
     }
 
@@ -17,7 +21,11 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
 
     // Verificar si el usuario ya existe
     if (users.find(user => user.email === email)) {
-        alert('Este correo electrónico ya está registrado');
+        Swal.fire({
+            icon: 'error',
+            title: 'Correo duplicado',
+            text: 'Este correo electrónico ya está registrado'
+        });
         return;
     }
 
@@ -32,6 +40,13 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    alert('Registro exitoso. Ahora puede iniciar sesión.');
-    window.location.href = 'login.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'Ahora puede iniciar sesión con su nueva cuenta',
+        timer: 3000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'login.html';
+    });
 });

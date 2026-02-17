@@ -18,6 +18,13 @@ function handleReport(event) {
     reports.push(reportData);
     localStorage.setItem('reports', JSON.stringify(reports));
 
-    alert('¡Reporte registrado correctamente!');
-    window.location.href = 'reports.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Reporte registrado',
+        text: '¡Reporte #' + reportData.id + ' registrado correctamente!',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'reports.html';
+    });
 }

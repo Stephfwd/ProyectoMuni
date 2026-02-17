@@ -22,6 +22,13 @@ document.getElementById('appointmentForm').addEventListener('submit', function (
     appointments.push(newAppointment);
     localStorage.setItem('appointments', JSON.stringify(appointments));
 
-    alert('Cita agendada correctamente.');
-    window.location.href = 'appointments.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Cita agendada',
+        text: 'Su cita ha sido programada con éxito.',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'appointments.html';
+    });
 });

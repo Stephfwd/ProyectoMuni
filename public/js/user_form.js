@@ -53,6 +53,13 @@ function handleUser(event) {
     }
 
     localStorage.setItem('users', JSON.stringify(users));
-    alert(userId ? 'Usuario actualizado correctamente.' : 'Usuario registrado correctamente.');
-    window.location.href = 'users.html';
+    Swal.fire({
+        icon: 'success',
+        title: userId ? 'Usuario actualizado' : 'Usuario registrado',
+        text: userId ? 'Los datos han sido actualizados correctamente.' : 'El nuevo usuario ha sido registrado en el sistema.',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'users.html';
+    });
 }

@@ -17,9 +17,20 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             email: user.email
         }));
 
-        alert('Inicio de sesión exitoso. ¡Bienvenido ' + user.fullname + '!');
-        window.location.href = 'index.html';
+        Swal.fire({
+            icon: 'success',
+            title: 'Inicio de sesión exitoso',
+            text: '¡Bienvenido ' + user.fullname + '!',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = 'index.html';
+        });
     } else {
-        alert('Correo electrónico o contraseña incorrectos');
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de acceso',
+            text: 'Correo electrónico o contraseña incorrectos'
+        });
     }
 });

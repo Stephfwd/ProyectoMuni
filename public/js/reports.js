@@ -61,5 +61,29 @@ function filterReports(category) {
 }
 
 function viewReport(id) {
-    alert('Detalles del reporte #' + id + ' (Funcionalidad en desarrollo)');
+    const reports = JSON.parse(localStorage.getItem('reports')) || [];
+    const report = reports.find(r => r.id === id);
+
+    if (report) {
+        Swal.fire({
+            title: 'Detalles del Reporte #' + id,
+            html: `
+                <div style="text-align: left;">
+                    <p><strong>Tipo:</strong> ${report.tipo}</p>
+                    <p><strong>Ubicación:</strong> ${report.ubicacion}</p>
+                    <p><strong>Descripción:</strong> ${report.descripcion}</p>
+                    <p><strong>Fecha:</strong> ${report.fecha}</p>
+                    <p><strong>Estado:</strong> ${report.estado}</p>
+                </div>
+            `,
+            icon: 'info',
+            confirmButtonText: 'Cerrar'
+        });
+    } else {
+        Swal.fire({
+            title: 'Reporte no encontrado',
+            text: 'No se pudieron cargar los detalles del reporte #' + id,
+            icon: 'error'
+        });
+    }
 }

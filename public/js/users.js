@@ -57,13 +57,29 @@ function filterUsers(query) {
 }
 
 function deleteUser(id) {
-    if (confirm('¿Está seguro de que desea eliminar este usuario?')) {
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        users = users.filter(user => user.id !== id);
-        localStorage.setItem('users', JSON.stringify(users));
-        loadUsers();
-        alert('Usuario eliminado correctamente.');
-    }
+    Swal.fire({
+        title: '¿Está seguro?',
+        text: "Esta acción no se puede deshacer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e74c3c',
+        cancelButtonColor: '#3498db',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users = users.filter(user => user.id !== id);
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+
+            Swal.fire(
+                '¡Eliminado!',
+                'El usuario ha sido eliminado correctamente.',
+                'success'
+            );
+        }
+    });
 }
 
 function editUser(id) {
