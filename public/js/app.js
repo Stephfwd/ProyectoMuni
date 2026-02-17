@@ -564,7 +564,6 @@ function updateAppointmentStatus(appointmentId, newStatus) {
     }
     alert(details);
 }
-}
 
 function updateUserStatus(userId, newStatus) {
     const users = getStoredData(STORAGE_KEYS.USERS);
