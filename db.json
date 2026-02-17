@@ -1,6 +1,15 @@
 {
-    "users": [],
-    "reportes": [],
-    "proyectos": [],
-    "citas": []
+  "users": [
+    {
+      "id": "f938",
+      "nombre": "rrrr",
+      "email": "eeee@gmail.com",
+      "password": "1221",
+      "rol": "ciudadano",
+      "estado": "activo"
+    }
+  ],
+  "reportes": [],
+  "proyectos": [],
+  "citas": []
 }
