@@ -15,7 +15,7 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
         fecha,
         hora,
         notas,
-        status: 'active'
+        estado: 'confirmada' // Coincide con la estructura de db.json
     };
 
     try {
@@ -23,7 +23,7 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
         Swal.fire({
             icon: 'success',
             title: '¡Cita Agendada!',
-            text: 'La cita se ha guardado correctamente.',
+            text: 'La cita se ha guardado correctamente en el servidor.',
             timer: 2000,
             showConfirmButton: false
         }).then(() => {
@@ -35,7 +35,7 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
         Swal.fire({
             icon: 'error',
             title: 'Error de Conexión',
-            text: 'No se pudo conectar con el servidor.'
+            text: 'No se pudo guardar la cita en el servidor.'
         });
     }
 });

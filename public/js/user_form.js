@@ -27,7 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkRes = await fetch(`${API_URL}/users?email=${encodeURIComponent(newUser.email)}`);
             const existing = await checkRes.json();
             if (existing.length > 0) {
-                alert('Ya existe un usuario con ese correo electrónico.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Usuario Duplicado',
+                    text: 'Ya existe un usuario con ese correo electrónico.'
+                });
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Usuario';
                 return;
@@ -41,11 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
-            alert('¡Usuario creado correctamente!');
-            window.location.href = 'users.html';
+            Swal.fire({
+                icon: 'success',
+                title: '¡Usuario Creado!',
+                text: 'El usuario ha sido registrado correctamente.',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'users.html';
+            });
         } catch (error) {
             console.error('Error al guardar usuario:', error);
-            alert('Error al conectar con el servidor. Verifica que json-server esté corriendo en el puerto 3002.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Servidor',
+                text: 'Error al conectar con el servidor. Verifica que json-server esté corriendo.'
+            });
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Usuario';
         }

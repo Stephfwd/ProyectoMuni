@@ -21,19 +21,33 @@ document.getElementById('loginForm').addEventListener('submit', async function (
                 rol: user.rol
             }));
 
-            alert('Inicio de sesión exitoso. ¡Bienvenido ' + (user.nombre || user.fullname) + '!');
-
-            // Redirigir según el rol
-            if (user.rol === 'admin') {
-                window.location.href = 'dashadmin.html';
-            } else {
-                window.location.href = 'index.html';
-            }
+            Swal.fire({
+                icon: 'success',
+                title: '¡Bienvenido!',
+                text: 'Inicio de sesión exitoso. ¡Hola ' + (user.nombre || user.fullname) + '!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                // Redirigir según el rol: admin va al panel, el resto al index
+                if (user.rol === 'admin') {
+                    window.location.href = 'dashadmin.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
         } else {
-            alert('Correo electrónico o contraseña incorrectos');
+            Swal.fire({
+                icon: 'error',
+                title: 'Credenciales Incorrectas',
+                text: 'Correo electrónico o contraseña incorrectos'
+            });
         }
     } catch (error) {
         console.error("Error al iniciar sesión:", error);
-        alert("Error de conexión con el servidor.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de Servidor',
+            text: 'No se pudo conectar con el servidor. Verifique su conexión.'
+        });
     }
 });

@@ -89,24 +89,53 @@ async function loadReports() {
 
 async function updateStatus(id, newStatus) {
     const msg = newStatus === 'cerrado' ? '¿Marcar este reporte como resuelto?' : '¿Reabrir este reporte?';
-    if (!confirm(msg)) return;
 
-    try {
-        const response = await fetch(`${API_URL}/reportes/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ estado: newStatus })
-        });
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-        loadReports();
-    } catch (error) {
-        console.error('Error actualizando reporte:', error);
-        alert('Error al actualizar el reporte.');
-    }
+    Swal.fire({
+        title: '¿Confirmar acción?',
+        text: msg,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#10b981',
+        cancelButtonColor: '#95a5a6',
+        confirmButtonText: 'Sí, proceder',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch(`${API_URL}/reportes/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ estado: newStatus })
+                });
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                loadReports();
+                Swal.fire('¡Éxito!', 'El estado del reporte ha sido actualizado.', 'success');
+            } catch (error) {
+                console.error('Error actualizando reporte:', error);
+                Swal.fire('Error', 'No se pudo actualizar el reporte.', 'error');
+            }
+        }
+    });
 }
 
 function viewDetails(report) {
-    alert(`ID: ${report.id}\nTipo: ${capitalize(report.tipo)}\nUbicación: ${report.ubicacion}\nDescripción: ${report.descripcion || 'N/A'}\nReportado por: ${report.reportado_por || 'N/A'}\nPrioridad: ${capitalize(report.prioridad)}\nFecha: ${report.fecha}\nEstado: ${capitalize(report.estado)}`);
+    Swal.fire({
+        title: 'Detalles del Reporte',
+        html: `
+            <div style="text-align: left; line-height: 1.6;">
+                <p><strong>ID:</strong> ${report.id}</p>
+                <p><strong>Tipo:</strong> ${capitalize(report.tipo)}</p>
+                <p><strong>Ubicación:</strong> ${report.ubicacion}</p>
+                <p><strong>Descripción:</strong> ${report.descripcion || 'N/A'}</p>
+                <p><strong>Reportado por:</strong> ${report.reportado_por || 'N/A'}</p>
+                <p><strong>Prioridad:</strong> <span class="priority-${report.prioridad}">${capitalize(report.prioridad)}</span></p>
+                <p><strong>Fecha:</strong> ${report.fecha}</p>
+                <p><strong>Estado:</strong> ${capitalize(report.estado)}</p>
+            </div>
+        `,
+        icon: 'info',
+        confirmButtonText: 'Cerrar'
+    });
 }
 
 function capitalize(str) {
@@ -148,6 +177,6 @@ async function exportCSV() {
         a.href = url; a.download = 'reportes.csv'; a.click();
         URL.revokeObjectURL(url);
     } catch (e) {
-        alert('Error al exportar datos.');
+        Swal.fire('Error', 'No se pudo exportar los datos.', 'error');
     }
 }

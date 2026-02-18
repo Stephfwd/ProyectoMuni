@@ -4,7 +4,7 @@ const API_URL = "http://localhost:3002";
 // Usuarios
 export async function getUsuarios() {
     try {
-        const respuestaServidor = await fetch(`${API_URL}/usuarios`, {
+        const respuestaServidor = await fetch(`${API_URL}/users`, {
             method: "GET"
         });
         if (!respuestaServidor.ok) throw new Error(`HTTP error! status: ${respuestaServidor.status}`);
@@ -62,7 +62,7 @@ export async function putUsuarios(usuario, id) {
 // Reportes
 export async function postReporte(reporte) {
     try {
-        const response = await fetch(`${API_URL}/reports`, {
+        const response = await fetch(`${API_URL}/reportes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export async function postReporte(reporte) {
 // Citas
 export async function postCita(cita) {
     try {
-        const response = await fetch(`${API_URL}/appointments`, {
+        const response = await fetch(`${API_URL}/citas`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

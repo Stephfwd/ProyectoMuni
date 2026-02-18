@@ -5,6 +5,8 @@ const STORAGE_KEYS = {
     APPOINTMENTS: 'muni_appointments_live'
 };
 
+const API_BASE_URL = "http://localhost:3002";
+
 // Estado de Filtros
 let currentReportFilter = 'all';
 let currentAppointmentFilter = 'today';
@@ -17,25 +19,20 @@ async function initStorage() {
     // Let's try to load from DB and fill if empty.
 
     try {
-        const response = await fetch('../data/db.json');
-        if (!response.ok) throw new Error('Failed to load db.json');
+        // Cargar usuarios
+        const usersRes = await fetch(`${API_BASE_URL}/users`);
+        const users = await usersRes.json();
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
 
-        const dbData = await response.json();
+        // Cargar reportes
+        const reportsRes = await fetch(`${API_BASE_URL}/reportes`);
+        const reports = await reportsRes.json();
+        localStorage.setItem(STORAGE_KEYS.REPORTS, JSON.stringify(reports));
 
-        // Load Users
-        if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
-            localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(dbData.users));
-        }
-
-        // Load Reports
-        if (!localStorage.getItem(STORAGE_KEYS.REPORTS)) {
-            localStorage.setItem(STORAGE_KEYS.REPORTS, JSON.stringify(dbData.reports));
-        }
-
-        // Load Appointments
-        if (!localStorage.getItem(STORAGE_KEYS.APPOINTMENTS)) {
-            localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(dbData.appointments));
-        }
+        // Cargar citas
+        const appointmentsRes = await fetch(`${API_BASE_URL}/citas`);
+        const appointments = await appointmentsRes.json();
+        localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(appointments));
 
         // Trigger render after data load
         const path = window.location.pathname;
@@ -63,14 +60,27 @@ const generateId = (prefix) => `${prefix}-${Math.floor(Math.random() * 9000) + 1
 
 function handleLogin(event) {
     event.preventDefault();
-    alert("¡Inicio de sesión exitoso!");
-    window.location.href = 'dashadmin.html';
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: '¡Inicio de sesión exitoso!',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'dashadmin.html';
+    });
 }
 
 function handleRegister(event) {
     event.preventDefault();
-    alert("¡Registro completado con éxito! Por favor inicie sesión.");
-    window.location.href = 'login.html';
+    Swal.fire({
+        icon: 'success',
+        title: '¡Registro Completado!',
+        text: 'Por favor, inicie sesión ahora.',
+        confirmButtonText: 'Ir al Login'
+    }).then(() => {
+        window.location.href = 'login.html';
+    });
 }
 
 function handleReport(event) {
@@ -91,8 +101,15 @@ function handleReport(event) {
     reports.unshift(newReport); // Agregar al inicio
     setStoredData(STORAGE_KEYS.REPORTS, reports);
 
-    alert("¡Reporte registrado correctamente!");
-    window.location.href = 'reports.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Reporte Enviado',
+        text: '¡Reporte registrado correctamente!',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'reports.html';
+    });
 }
 
 function handleUser(event) {
@@ -111,8 +128,15 @@ function handleUser(event) {
     users.unshift(newUser);
     setStoredData(STORAGE_KEYS.USERS, users);
 
-    alert("¡Usuario registrado correctamente!");
-    window.location.href = 'users.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Usuario Registrado',
+        text: '¡Usuario registrado correctamente!',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'users.html';
+    });
 }
 
 function handleAppointment(event) {
@@ -132,8 +156,15 @@ function handleAppointment(event) {
     appointments.unshift(newAppointment);
     setStoredData(STORAGE_KEYS.APPOINTMENTS, appointments);
 
-    alert("¡Cita agendada correctamente!");
-    window.location.href = 'appointments.html';
+    Swal.fire({
+        icon: 'success',
+        title: 'Cita Agendada',
+        text: '¡Cita agendada correctamente!',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = 'appointments.html';
+    });
 }
 
 // --- Funciones de Renderizado ---
@@ -572,18 +603,29 @@ function updateReportStatus(reportId, newStatus) {
             ? '¿Marcar este reporte como resuelto?'
             : '¿Reabrir este reporte?';
 
-        if (confirm(confirmMsg)) {
-            reports[reportIndex].estado = newStatus;
-            setStoredData(STORAGE_KEYS.REPORTS, reports);
+        Swal.fire({
+            title: '¿Confirmar acción?',
+            text: confirmMsg,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3498db',
+            cancelButtonColor: '#95a5a6',
+            confirmButtonText: 'Sí, cambiar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                reports[reportIndex].estado = newStatus;
+                setStoredData(STORAGE_KEYS.REPORTS, reports);
 
-            // Refresh the view
-            renderReportsTable();
-            if (document.getElementById('dashboard-efficiency')) {
-                renderDashboardStats();
+                // Refresh the view
+                renderReportsTable();
+                if (document.getElementById('dashboard-efficiency')) {
+                    renderDashboardStats();
+                }
+
+                Swal.fire('¡Actualizado!', `Reporte ${reportId} actualizado a "${newStatus}"`, 'success');
             }
-
-            alert(`Reporte ${reportId} actualizado de "${oldStatus}" a "${newStatus}"`);
-        }
+        });
     }
 }
 
@@ -592,17 +634,22 @@ function viewReportDetails(reportId) {
     const report = reports.find(r => r.id === reportId);
 
     if (report) {
-        const details = `
-ID: ${report.id}
-Tipo: ${capitalize(report.tipo)}
-Ubicación: ${report.ubicacion}
-Descripción: ${report.descripcion || 'N/A'}
-Reportado por: ${report.reportado_por}
-Prioridad: ${capitalize(report.prioridad)}
-Fecha: ${report.fecha}
-Estado: ${capitalize(report.estado)}
-        `;
-        alert(details);
+        Swal.fire({
+            title: 'Detalles del Reporte',
+            html: `
+                <div style="text-align: left; line-height: 1.6;">
+                    <p><strong>ID:</strong> ${report.id}</p>
+                    <p><strong>Tipo:</strong> ${capitalize(report.tipo)}</p>
+                    <p><strong>Ubicación:</strong> ${report.ubicacion}</p>
+                    <p><strong>Descripción:</strong> ${report.descripcion || 'N/A'}</p>
+                    <p><strong>Reportado por:</strong> ${report.reportado_por}</p>
+                    <p><strong>Prioridad:</strong> ${capitalize(report.prioridad)}</p>
+                    <p><strong>Fecha:</strong> ${report.fecha}</p>
+                    <p><strong>Estado:</strong> ${capitalize(report.estado)}</p>
+                </div>
+            `,
+            icon: 'info'
+        });
     }
 }
 
@@ -615,20 +662,30 @@ function updateAppointmentStatus(appointmentId, newStatus) {
             ? '¿Marcar esta cita como completada?'
             : '¿Cancelar esta cita?';
 
-        if (confirm(confirmMsg)) {
-            appointments[aptIndex].estado = newStatus;
-            setStoredData(STORAGE_KEYS.APPOINTMENTS, appointments);
+        Swal.fire({
+            title: '¿Confirmar acción?',
+            text: confirmMsg,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3498db',
+            cancelButtonColor: '#95a5a6',
+            confirmButtonText: 'Sí, cambiar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                appointments[aptIndex].estado = newStatus;
+                setStoredData(STORAGE_KEYS.APPOINTMENTS, appointments);
 
-            // Refresh the view
-            renderAppointmentsTable();
-            if (document.getElementById('dashboard-efficiency')) {
-                renderDashboardStats();
+                // Refresh the view
+                renderAppointmentsTable();
+                if (document.getElementById('dashboard-efficiency')) {
+                    renderDashboardStats();
+                }
+
+                Swal.fire('¡Actualizado!', `Cita ${appointmentId} actualizada a "${newStatus}"`, 'success');
             }
-
-            alert(`Cita ${appointmentId} actualizada a "${newStatus}"`);
-        }
+        });
     }
-    alert(details);
 }
 
 function updateUserStatus(userId, newStatus) {
@@ -642,18 +699,29 @@ function updateUserStatus(userId, newStatus) {
                 ? '¿Desactivar este usuario?'
                 : '¿Cambiar estado del usuario?';
 
-        if (confirm(confirmMsg)) {
-            users[userIndex].estado = newStatus;
-            setStoredData(STORAGE_KEYS.USERS, users);
+        Swal.fire({
+            title: '¿Confirmar cambio?',
+            text: confirmMsg,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3498db',
+            cancelButtonColor: '#95a5a6',
+            confirmButtonText: 'Sí, cambiar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                users[userIndex].estado = newStatus;
+                setStoredData(STORAGE_KEYS.USERS, users);
 
-            // Refresh the view
-            renderUsersTable();
-            if (document.getElementById('total-users-count')) {
-                renderDashboardStats();
+                // Refresh the view
+                renderUsersTable();
+                if (document.getElementById('total-users-count')) {
+                    renderDashboardStats();
+                }
+
+                Swal.fire('¡Actualizado!', `Usuario ${userId} actualizado a "${newStatus}"`, 'success');
             }
-
-            alert(`Usuario ${userId} actualizado a "${newStatus}"`);
-        }
+        });
     }
 }
 
@@ -662,15 +730,20 @@ function viewUserDetails(userId) {
     const user = users.find(u => u.id === userId);
 
     if (user) {
-        const details = `
-ID: ${user.id}
-Nombre: ${user.nombre}
-Email: ${user.email}
-Rol: ${capitalize(user.rol)}
-Estado: ${capitalize(user.estado)}
-Fecha de Registro: ${user.fecha_registro || 'N/A'}
-        `;
-        alert(details);
+        Swal.fire({
+            title: 'Detalles del Usuario',
+            html: `
+                <div style="text-align: left; line-height: 1.6;">
+                    <p><strong>ID:</strong> ${user.id}</p>
+                    <p><strong>Nombre:</strong> ${user.nombre}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Rol:</strong> ${capitalize(user.rol)}</p>
+                    <p><strong>Estado:</strong> ${capitalize(user.estado)}</p>
+                    <p><strong>Registro:</strong> ${user.fecha_registro || 'N/A'}</p>
+                </div>
+            `,
+            icon: 'info'
+        });
     }
 }
 

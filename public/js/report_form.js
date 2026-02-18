@@ -31,11 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
-            alert('¡Reporte registrado correctamente!');
-            window.location.href = 'reports.html';
+            Swal.fire({
+                icon: 'success',
+                title: '¡Reporte Enviado!',
+                text: 'El reporte ha sido registrado correctamente.',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'reports.html';
+            });
         } catch (error) {
             console.error('Error al guardar reporte:', error);
-            alert('Error al conectar con el servidor. Verifica que json-server esté corriendo en el puerto 3002.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Envío',
+                text: 'Error al conectar con el servidor. Verifica que json-server esté corriendo.'
+            });
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fas fa-save"></i> Registrar Reporte';
         }

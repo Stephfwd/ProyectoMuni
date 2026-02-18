@@ -17,6 +17,22 @@
       "password": "admin1234",
       "estado": "activo",
       "fecha_registro": "2026-02-18"
+    },
+    {
+      "id": "c959",
+      "nombre": "nao gonzales",
+      "email": "nao34@gmail.com",
+      "password": "123456",
+      "rol": "ciudadano",
+      "estado": "activo"
+    },
+    {
+      "id": "c3df",
+      "nombre": "rrg",
+      "email": "rr@gmail.com",
+      "password": "is1221",
+      "rol": "ciudadano",
+      "estado": "activo"
     }
   ],
   "reportes": [
@@ -29,8 +45,47 @@
       "prioridad": "media",
       "fecha": "2026-02-18",
       "estado": "pendiente"
+    },
+    {
+      "id": "55df",
+      "tipo": "limpieza",
+      "ubicacion": "frente al escuela augusto colombari",
+      "descripcion": "calle sucia",
+      "reportado_por": "23344567",
+      "prioridad": "media",
+      "fecha": "2026-02-18",
+      "estado": "cerrado"
+    },
+    {
+      "id": "a1d5",
+      "tipo": "limpieza",
+      "ubicacion": "                      ",
+      "descripcion": "                     ",
+      "reportado_por": "   ",
+      "prioridad": "media",
+      "fecha": "2026-02-18",
+      "estado": "pendiente"
     }
   ],
   "proyectos": [],
-  "citas": []
+  "citas": [
+    {
+      "id": "1",
+      "ciudadano": "Juan Pérez",
+      "tramite": "Licencia de Construcción",
+      "fecha": "2026-02-18",
+      "hora": "09:00",
+      "notas": "Traer planos impresos",
+      "estado": "confirmada"
+    },
+    {
+      "id": "2",
+      "ciudadano": "María López",
+      "tramite": "Pago de Impuestos",
+      "fecha": "2026-02-19",
+      "hora": "14:30",
+      "notas": "Consulta sobre exoneración",
+      "estado": "pendiente"
+    }
+  ]
 }

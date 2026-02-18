@@ -98,38 +98,76 @@ async function loadUsers() {
 }
 
 async function updateUserStatus(id, newStatus) {
-    const msg = newStatus === 'activo' ? '¿Activar este usuario?' : '¿Desactivar este usuario?';
-    if (!confirm(msg)) return;
-
-    try {
-        const response = await fetch(`${API_URL}/users/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ estado: newStatus })
-        });
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-        loadUsers();
-    } catch (error) {
-        console.error('Error actualizando usuario:', error);
-        alert('Error al actualizar el usuario.');
-    }
+    Swal.fire({
+        title: '¿Confirmar cambio?',
+        text: msg,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3498db',
+        cancelButtonColor: '#95a5a6',
+        confirmButtonText: 'Sí, cambiar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch(`${API_URL}/users/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ estado: newStatus })
+                });
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                loadUsers();
+                Swal.fire('¡Actualizado!', 'El estado ha sido actualizado.', 'success');
+            } catch (error) {
+                console.error('Error actualizando usuario:', error);
+                Swal.fire('Error', 'No se pudo actualizar el estado.', 'error');
+            }
+        }
+    });
 }
 
 async function deleteUser(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.')) return;
-
-    try {
-        const response = await fetch(`${API_URL}/users/${id}`, { method: 'DELETE' });
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-        loadUsers();
-    } catch (error) {
-        console.error('Error eliminando usuario:', error);
-        alert('Error al eliminar el usuario.');
-    }
+    Swal.fire({
+        title: '¿Está seguro?',
+        text: '¿Deseas eliminar este usuario? Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e74c3c',
+        cancelButtonColor: '#95a5a6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch(`${API_URL}/users/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                loadUsers();
+                Swal.fire('¡Eliminado!', 'El usuario ha sido eliminado.', 'success');
+            } catch (error) {
+                console.error('Error eliminando usuario:', error);
+                Swal.fire('Error', 'No se pudo eliminar el usuario.', 'error');
+            }
+        }
+    });
 }
 
 function viewUserDetails(user) {
-    alert(`ID: ${user.id}\nNombre: ${user.nombre}\nEmail: ${user.email}\nTeléfono: ${user.telefono || 'N/A'}\nRol: ${capitalize(user.rol)}\nEstado: ${capitalize(user.estado)}\nFecha de Registro: ${user.fecha_registro || 'N/A'}`);
+    Swal.fire({
+        title: 'Detalles del Usuario',
+        html: `
+            <div style="text-align: left; line-height: 1.6;">
+                <p><strong>ID:</strong> ${user.id}</p>
+                <p><strong>Nombre:</strong> ${user.nombre}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Teléfono:</strong> ${user.telefono || 'N/A'}</p>
+                <p><strong>Rol:</strong> ${capitalize(user.rol)}</p>
+                <p><strong>Estado:</strong> ${capitalize(user.estado)}</p>
+                <p><strong>Registro:</strong> ${user.fecha_registro || 'N/A'}</p>
+            </div>
+        `,
+        icon: 'info',
+        confirmButtonText: 'Cerrar'
+    });
 }
 
 function capitalize(str) {

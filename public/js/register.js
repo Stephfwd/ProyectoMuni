@@ -10,7 +10,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
     // Validación básica
     if (password !== confirmPassword) {
-        alert('Las contraseñas no coinciden');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Contraseñas no coinciden',
+            text: 'Por favor, asegúrese de que ambas contraseñas sean iguales.'
+        });
         return;
     }
 
@@ -19,7 +23,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         const existingUsers = await checkEmailAvailability(email);
 
         if (existingUsers.length > 0) {
-            alert('Este correo electrónico ya está registrado');
+            Swal.fire({
+                icon: 'error',
+                title: 'Usuario ya existe',
+                text: 'Este correo electrónico ya está registrado en el sistema.'
+            });
             return;
         }
 
@@ -34,10 +42,22 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
         // Usar la función postUsuarios importada
         await postUsuarios(newUser);
-        alert('¡Registro exitoso! Ahora puede iniciar sesión.');
-        window.location.href = 'login.html';
+
+        Swal.fire({
+            icon: 'success',
+            title: '¡Registro Exitoso!',
+            text: 'Su cuenta ha sido creada correctamente.',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = 'login.html';
+        });
 
     } catch (error) {
-        alert("Error al registrar el usuario. Verifique la consola.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de Registro',
+            text: 'Hubo un problema al crear su cuenta. Inténtelo de nuevo más tarde.'
+        });
     }
 });
