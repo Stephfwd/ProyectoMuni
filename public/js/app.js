@@ -5,6 +5,11 @@ const STORAGE_KEYS = {
     APPOINTMENTS: 'muni_appointments_live'
 };
 
+// Estado de Filtros
+let currentReportFilter = 'all';
+let currentAppointmentFilter = 'today';
+
+
 // Inicializar datos desde db.json
 async function initStorage() {
     // Check if we already have data to avoid overwriting user changes in this session
@@ -248,8 +253,10 @@ function renderReportsTable() {
 
     const reports = getStoredData(STORAGE_KEYS.REPORTS);
 
+    // Initial Stats Calculation (using all reports)
     // --- Update Reports Page Stats ---
     const newTodayEl = document.getElementById('reports-new-today');
+
     const resolvedEl = document.getElementById('reports-resolved');
     const highPriorityEl = document.getElementById('reports-high-priority');
 
@@ -276,7 +283,15 @@ function renderReportsTable() {
 
     tableBody.innerHTML = '';
 
-    reports.forEach(report => {
+    // Filter reports for table
+    const filteredReports = reports.filter(report => {
+        if (currentReportFilter === 'all') return true;
+        return report.tipo.toLowerCase() === currentReportFilter.toLowerCase();
+    });
+
+    updateFilterButtons('report-filters', currentReportFilter);
+
+    filteredReports.forEach(report => {
         const row = document.createElement('tr');
 
         // Create action buttons based on current status
@@ -397,7 +412,9 @@ function renderAppointmentsTable() {
 
     const appointments = getStoredData(STORAGE_KEYS.APPOINTMENTS);
 
+    // Initial Stats (using all appointments)
     // --- Update Appointments Page Stats ---
+
     const todayEl = document.getElementById('appointments-today');
     const weekEl = document.getElementById('appointments-week');
     const cancelledEl = document.getElementById('appointments-cancelled');
@@ -439,7 +456,56 @@ function renderAppointmentsTable() {
 
     tableBody.innerHTML = '';
 
-    appointments.forEach(apt => {
+    // Filter logic
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+    // Calculate start of week (Sunday)
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    // Calculate end of week (Saturday)
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+
+    const filteredAppointments = appointments.filter(apt => {
+        if (currentAppointmentFilter === 'today') {
+            return apt.fecha === todayStr;
+        } else if (currentAppointmentFilter === 'tomorrow') {
+            return apt.fecha === tomorrowStr;
+        } else if (currentAppointmentFilter === 'week') {
+            const aptDate = new Date(apt.fecha + 'T00:00:00'); // Ensure time is not an issue
+            return aptDate >= startOfWeek && aptDate <= endOfWeek;
+        } else if (currentAppointmentFilter === 'all') {
+            return true;
+        }
+        return true;
+    });
+
+    // Update filter buttons UI (if we had a container ID for them like report-filters, but we can target by ID directly)
+    // We'll use a specific helper for appointments since they are individual IDs in a div
+    ['filter-today', 'filter-tomorrow', 'filter-week'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            const filterVal = btn.getAttribute('data-filter');
+            if (filterVal === currentAppointmentFilter) {
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-primary');
+            } else {
+                btn.classList.add('btn-secondary');
+                btn.classList.remove('btn-primary');
+            }
+        }
+    });
+
+
+    filteredAppointments.forEach(apt => {
         const row = document.createElement('tr');
 
         // Create action buttons based on current status
@@ -608,9 +674,53 @@ Fecha de Registro: ${user.fecha_registro || 'N/A'}
     }
 }
 
+// --- Filter Event Setup ---
+function setupFilters() {
+    // Reports Logics
+    const reportButtons = document.querySelectorAll('.report-filters button');
+    reportButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const filter = e.target.getAttribute('data-filter');
+            if (filter) {
+                currentReportFilter = filter;
+                renderReportsTable();
+            }
+        });
+    });
+
+    // Appointments Logic
+    const ids = ['filter-today', 'filter-tomorrow', 'filter-week'];
+    ids.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                if (filter) {
+                    currentAppointmentFilter = filter;
+                    renderAppointmentsTable();
+                }
+            });
+        }
+    });
+}
+
+function updateFilterButtons(containerClass, activeFilter) {
+    const buttons = document.querySelectorAll(`.${containerClass} button`);
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === activeFilter) {
+            btn.classList.remove('btn-secondary');
+            btn.classList.add('btn-primary');
+        } else {
+            btn.classList.add('btn-secondary');
+            btn.classList.remove('btn-primary');
+        }
+    });
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     initStorage();
+    setupFilters();
 
     const path = window.location.pathname;
     if (path.includes('dashadmin.html')) {

@@ -13,11 +13,11 @@
 <body>
 
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="index.html" class="sidebar-brand">
-                    <i class="fas fa-landmark"></i> MuniPanel
+                    <img src="../imgs/Gemini_Generated_Image_l1zutl1zutl1zutl-removebg-preview.png" alt="Muni Escazú"
+                        style="height: 35px; border-radius: 50%;"> Municipalidad Escazú
                 </a>
             </div>
 
@@ -56,19 +56,22 @@
             </div>
 
             <div class="recent-activity">
-                <form id="appointmentForm" onsubmit="handleAppointment(event)">
+                <form id="appointmentForm">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                         <div>
                             <label for="ciudadano"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Ciudadano</label>
-                            <input type="text" id="ciudadano" name="ciudadano" required placeholder="Nombre o Cédula"
+                            <input type="text" id="ciudadano" name="ciudadano" required
+                                placeholder="Nombre completo del ciudadano" minlength="3" maxlength="80"
+                                title="Mínimo 3 caracteres"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
                             <label for="tramite" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Tipo
                                 de Trámite</label>
-                            <select id="tramite" name="tramite"
+                            <select id="tramite" name="tramite" required
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="">-- Seleccione un trámite --</option>
                                 <option value="Permiso de Construcción">Permiso de Construcción</option>
                                 <option value="Pago de Impuestos">Pago de Impuestos</option>
                                 <option value="Solicitud de Patente">Solicitud de Patente</option>
@@ -79,8 +82,9 @@
                         <div>
                             <label for="departamento"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Departamento</label>
-                            <select id="departamento" name="departamento"
+                            <select id="departamento" name="departamento" required
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="">-- Seleccione un departamento --</option>
                                 <option value="Urbanismo">Urbanismo</option>
                                 <option value="Cobros">Cobros</option>
                                 <option value="Catastro">Catastro</option>
@@ -98,14 +102,17 @@
                         <div>
                             <label for="hora"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Hora</label>
-                            <input type="time" id="hora" name="hora" required
+                            <input type="time" id="hora" name="hora" required min="07:00" max="17:00"
+                                title="Horario de atención: 7:00 AM a 5:00 PM"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="grid-column: span 2;">
                             <label for="notas" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Notas
                                 Adicionales</label>
                             <textarea id="notas" name="notas" rows="3" placeholder="Detalles extra sobre la cita..."
+                                maxlength="300"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+                            <small style="color: #888;" id="notas-counter">0 / 300 caracteres</small>
                         </div>
                     </div>
 
@@ -120,6 +127,18 @@
     </div>
 
     <script src="../js/app.js"></script>
+    <script>
+        // Set minimum date to today
+        const fechaInput = document.getElementById('fecha');
+        fechaInput.min = new Date().toISOString().split('T')[0];
+
+        // Character counter for notes
+        const notas = document.getElementById('notas');
+        const notasCounter = document.getElementById('notas-counter');
+        notas.addEventListener('input', () => {
+            notasCounter.textContent = `${notas.value.length} / 300 caracteres`;
+        });
+    </script>
 </body>
 
 </html>

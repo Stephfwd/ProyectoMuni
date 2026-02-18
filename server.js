@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages/index.html'));
 });
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`Servidor correindo exitosamente en: http://localhost:${PORT}`);
+  console.log(`Servidor corriendo exitosamente en: http://localhost:${PORT}`);
 });

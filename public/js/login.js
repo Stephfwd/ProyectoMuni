@@ -16,13 +16,19 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             // Guardar sesión del usuario con el rol
             sessionStorage.setItem('currentUser', JSON.stringify({
                 id: user.id,
-                fullname: user.nombre || user.fullname, // Handle both naming conventions if present
+                fullname: user.nombre || user.fullname,
                 email: user.email,
-                rol: user.rol // Crucial for admin check
+                rol: user.rol
             }));
 
             alert('Inicio de sesión exitoso. ¡Bienvenido ' + (user.nombre || user.fullname) + '!');
-            window.location.href = 'index.html';
+
+            // Redirigir según el rol
+            if (user.rol === 'admin') {
+                window.location.href = 'dashadmin.html';
+            } else {
+                window.location.href = 'index.html';
+            }
         } else {
             alert('Correo electrónico o contraseña incorrectos');
         }

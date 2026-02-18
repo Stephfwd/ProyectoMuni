@@ -1,5 +1,5 @@
 // Base URL for the API
-const API_URL = "http://localhost:3001";
+const API_URL = "http://localhost:3002";
 
 // Usuarios
 export async function getUsuarios() {

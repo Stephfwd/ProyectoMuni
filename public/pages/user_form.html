@@ -13,11 +13,11 @@
 <body>
 
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="index.html" class="sidebar-brand">
-                    <i class="fas fa-landmark"></i> MuniPanel
+                    <img src="../imgs/Gemini_Generated_Image_l1zutl1zutl1zutl-removebg-preview.png" alt="Muni Escazú"
+                        style="height: 35px; border-radius: 50%;"> Municipalidad Escazú
                 </a>
             </div>
 
@@ -56,24 +56,29 @@
             </div>
 
             <div class="recent-activity">
-                <form id="userForm"> <!-- Using GET to simulate submission and return to list -->
+                <form id="userForm">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                         <div>
                             <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nombre
                                 Completo</label>
                             <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez"
+                                minlength="3" maxlength="80" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+"
+                                title="Solo letras y espacios, mínimo 3 caracteres"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
                             <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Correo
                                 Electrónico</label>
                             <input type="email" id="email" name="email" required placeholder="juan.perez@ejemplo.com"
+                                maxlength="100"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
                             <label for="telefono"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 8888-8888"
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 88888888"
+                                pattern="[0-9]{8}" maxlength="8" title="Ingrese exactamente 8 dígitos numéricos"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
@@ -90,7 +95,8 @@
                             <label for="password"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Contraseña
                                 Temporal</label>
-                            <input type="password" id="password" name="password" required
+                            <input type="password" id="password" name="password" required minlength="6" maxlength="50"
+                                title="Mínimo 6 caracteres" placeholder="Mínimo 6 caracteres"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
@@ -111,7 +117,7 @@
                             Usuario</button>
                     </div>
                 </form>
-                <script type="module" src="../js/app.js"></script>
+                <script src="../js/user_form.js"></script>
             </div>
         </main>
     </div>

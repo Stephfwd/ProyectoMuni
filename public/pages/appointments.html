@@ -17,7 +17,8 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="index.html" class="sidebar-brand">
-                    <i class="fas fa-landmark"></i> MuniPanel
+                    <img src="../imgs/Gemini_Generated_Image_l1zutl1zutl1zutl-removebg-preview.png" alt="Muni Escazú"
+                        style="height: 35px; border-radius: 50%;"> Municipalidad Escazú
                 </a>
             </div>
 
@@ -92,10 +93,11 @@
                 <h2>Próximas Citas</h2>
                 <div style="display: flex; gap: 1rem; margin-bottom: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
                     <!-- Date Filter Mockup -->
-                    <button class="btn btn-primary">Hoy</button>
-                    <button class="btn btn-secondary">Mañana</button>
-                    <button class="btn btn-secondary">Esta Semana</button>
-                    <input type="date" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <button id="filter-today" class="btn btn-primary" data-filter="today">Hoy</button>
+                    <button id="filter-tomorrow" class="btn btn-secondary" data-filter="tomorrow">Mañana</button>
+                    <button id="filter-week" class="btn btn-secondary" data-filter="week">Esta Semana</button>
+                    <input type="date" id="filter-date-picker"
+                        style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
                 </div>
 
                 <table class="activity-table">

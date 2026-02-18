@@ -1,15 +1,36 @@
 {
   "users": [
     {
-      "id": "f938",
-      "nombre": "rrrr",
-      "email": "eeee@gmail.com",
-      "password": "1221",
-      "rol": "ciudadano",
+      "id": "admin-001",
+      "nombre": "Administrador",
+      "email": "admin@escazu.go.cr",
+      "password": "admin1234",
+      "rol": "admin",
       "estado": "activo"
+    },
+    {
+      "id": "405d",
+      "nombre": "wertewr",
+      "email": "rrrr@gmail.com",
+      "telefono": "88888888",
+      "rol": "ciudadano",
+      "password": "admin1234",
+      "estado": "activo",
+      "fecha_registro": "2026-02-18"
     }
   ],
-  "reportes": [],
+  "reportes": [
+    {
+      "id": "1ebf",
+      "tipo": "infraestructura",
+      "ubicacion": "ertherth",
+      "descripcion": "erthter",
+      "reportado_por": "trhrhr",
+      "prioridad": "media",
+      "fecha": "2026-02-18",
+      "estado": "pendiente"
+    }
+  ],
   "proyectos": [],
   "citas": []
 }
