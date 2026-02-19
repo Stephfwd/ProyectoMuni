@@ -14,25 +14,42 @@ let currentAppointmentFilter = 'today';
 
 // Inicializar datos desde db.json
 async function initStorage() {
-    // Check if we already have data to avoid overwriting user changes in this session
-    // For this demo, we can opt to always refresh from DB or only if empty. 
-    // Let's try to load from DB and fill if empty.
-
     try {
         // Cargar usuarios
-        const usersRes = await fetch(`${API_BASE_URL}/users`);
-        const users = await usersRes.json();
-        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+        let users = [];
+        try {
+            const usersRes = await fetch(`${API_BASE_URL}/users`);
+            if (usersRes.ok) users = await usersRes.json();
+        } catch (e) {
+            console.info("[Storage] Modo Offline: No se pudo cargar usuarios desde la API. Usando local.");
+        }
+        if (users.length > 0 || !localStorage.getItem(STORAGE_KEYS.USERS)) {
+            localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+        }
 
         // Cargar reportes
-        const reportsRes = await fetch(`${API_BASE_URL}/reportes`);
-        const reports = await reportsRes.json();
-        localStorage.setItem(STORAGE_KEYS.REPORTS, JSON.stringify(reports));
+        let reports = [];
+        try {
+            const reportsRes = await fetch(`${API_BASE_URL}/reportes`);
+            if (reportsRes.ok) reports = await reportsRes.json();
+        } catch (e) {
+            console.info("[Storage] Modo Offline: No se pudo cargar reportes desde la API. Usando local.");
+        }
+        if (reports.length > 0 || !localStorage.getItem(STORAGE_KEYS.REPORTS)) {
+            localStorage.setItem(STORAGE_KEYS.REPORTS, JSON.stringify(reports));
+        }
 
         // Cargar citas
-        const appointmentsRes = await fetch(`${API_BASE_URL}/citas`);
-        const appointments = await appointmentsRes.json();
-        localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(appointments));
+        let appointments = [];
+        try {
+            const appointmentsRes = await fetch(`${API_BASE_URL}/citas`);
+            if (appointmentsRes.ok) appointments = await appointmentsRes.json();
+        } catch (e) {
+            console.info("[Storage] Modo Offline: No se pudo cargar citas desde la API. Usando local.");
+        }
+        if (appointments.length > 0 || !localStorage.getItem(STORAGE_KEYS.APPOINTMENTS)) {
+            localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(appointments));
+        }
 
         // Trigger render after data load
         const path = window.location.pathname;
@@ -40,11 +57,10 @@ async function initStorage() {
         if (path.includes('reports.html')) renderReportsTable();
         if (path.includes('users.html')) renderUsersTable();
         if (path.includes('appointments.html')) renderAppointmentsTable();
-        // We can add others if needed, but dashboard is the main one needing immediate stats
 
     } catch (error) {
-        console.error('Error loading initial data:', error);
-        // Fallback to empty arrays if DB load fails
+        console.error('Error general en initStorage:', error);
+        // Fallback safety
         if (!localStorage.getItem(STORAGE_KEYS.USERS)) localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([]));
         if (!localStorage.getItem(STORAGE_KEYS.REPORTS)) localStorage.setItem(STORAGE_KEYS.REPORTS, JSON.stringify([]));
         if (!localStorage.getItem(STORAGE_KEYS.APPOINTMENTS)) localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify([]));
