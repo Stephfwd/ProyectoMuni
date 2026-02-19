@@ -1,10 +1,13 @@
-import { loginUser } from './services/api.js';
+import { loginUser, getUsuarios } from './services/api.js';
 
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    console.log(email, password);
+    
 
     if (!email || !password) {
         Swal.fire({
@@ -17,10 +20,13 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
     try {
         // Fetch users from the database using imported service
-        const users = await loginUser(email, password);
+        const users = await getUsuarios();
+        console.log(users);
 
-        if (users.length > 0) {
-            const user = users[0];
+        let user = users.find(user => user.email === email && user.password === password);
+        console.log(user);
+        
+        if (user) {
 
             // Guardar sesión del usuario con el rol
             sessionStorage.setItem('currentUser', JSON.stringify({
