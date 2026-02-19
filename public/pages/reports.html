@@ -9,6 +9,116 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 660px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            color: #1a1a2e;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #888;
+            padding: .2rem .5rem;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            background: #f1f5f9;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-grid .full {
+            grid-column: span 2;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .field-group label {
+            font-size: .82rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .field-group input,
+        .field-group select,
+        .field-group textarea {
+            padding: .7rem .9rem;
+            border: 1.5px solid #ddd;
+            border-radius: 7px;
+            font-size: .9rem;
+            font-family: inherit;
+            background: #fafafa;
+            transition: border-color .2s;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus,
+        .field-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: #fff;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: .75rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media(max-width:600px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-grid .full {
+                grid-column: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -28,6 +138,9 @@
                 <a href="users.html"><i class="fas fa-users"></i> Usuarios</a>
                 <a href="reports.html" class="active"><i class="fas fa-file-alt"></i> Reportes</a>
                 <a href="appointments.html"><i class="fas fa-calendar-check"></i> Citas</a>
+                <a href="financiamiento.html"><i class="fas fa-hand-holding-usd"></i> Financiamientos</a>
+                <a href="proyectos_viales.html"><i class="fas fa-road"></i> Proyectos Viales</a>
+                <a href="servicios_publicos.html"><i class="fas fa-tools"></i> Servicios Públicos</a>
                 <a href="settings.html"><i class="fas fa-cog"></i> Configuración</a>
             </nav>
 
@@ -48,58 +161,64 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="dashboard-header">
-                <div>
-                    <h1>Centro de Reportes</h1>
-                    <p class="dashboard-date">Visualiza y analiza los incidentes reportados por los ciudadanos.</p>
-                </div>
-                <div>
-                    <button class="btn btn-secondary"><i class="fas fa-download"></i> Exportar Data</button>
-                    <a href="report_form.html" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Reporte</a>
-                </div>
+                 <h1>Gestion de reportes</h1>
             </div>
-
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-info">
                         <h3 id="reports-new-today">0</h3>
                         <p>Nuevos hoy</p>
                     </div>
-                    <div class="stat-icon reports">
-                        <i class="fas fa-exclamation-triangle"></i>
+                    <div class="stat-icon reports"><i class="fas fa-exclamation-triangle"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3 id="reports-in-process">0</h3>
+                        <p>En Proceso</p>
                     </div>
+                    <div class="stat-icon tasks"><i class="fas fa-spinner"></i></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
                         <h3 id="reports-resolved">0</h3>
                         <p>Resueltos</p>
                     </div>
-                    <div class="stat-icon tasks">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
+                    <div class="stat-icon users"><i class="fas fa-check-circle"></i></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
                         <h3 id="reports-high-priority">0</h3>
                         <p>Prioridad Alta</p>
                     </div>
-                    <div class="stat-icon growth">
-                        <!-- Using growth for high priority color if suitable, or style tweaks needed -->
-                        <i class="fas fa-fire"></i>
-                    </div>
+                    <div class="stat-icon growth"><i class="fas fa-fire"></i></div>
                 </div>
             </div>
 
             <div class="recent-activity">
                 <h2>Reportes Recientes</h2>
-                <div class="report-filters" style="margin-bottom: 15px; display:flex; gap: 10px;">
-                    <button id="filter-all" class="btn btn-primary" data-filter="all"
-                        style="padding: 5px 15px; font-size: 0.9em;">Todos</button>
-                    <button id="filter-infra" class="btn btn-secondary" data-filter="infraestructura"
-                        style="padding: 5px 15px; font-size: 0.9em;">Infraestructura</button>
-                    <button id="filter-security" class="btn btn-secondary" data-filter="seguridad"
-                        style="padding: 5px 15px; font-size: 0.9em;">Seguridad</button>
-                    <button id="filter-cleaning" class="btn btn-secondary" data-filter="limpieza"
-                        style="padding: 5px 15px; font-size: 0.9em;">Limpieza</button>
+                <div class="report-filters" style="margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span style="font-size:.8rem;font-weight:600;color:#666;align-self:center;">Tipo:</span>
+                    <button class="btn btn-primary" data-filter-tipo="all"
+                        style="padding:5px 15px;font-size:.9em;">Todos</button>
+                    <button class="btn btn-secondary" data-filter-tipo="infraestructura"
+                        style="padding:5px 15px;font-size:.9em;">Infraestructura</button>
+                    <button class="btn btn-secondary" data-filter-tipo="seguridad"
+                        style="padding:5px 15px;font-size:.9em;">Seguridad</button>
+                    <button class="btn btn-secondary" data-filter-tipo="limpieza"
+                        style="padding:5px 15px;font-size:.9em;">Limpieza</button>
+                    <button class="btn btn-secondary" data-filter-tipo="alumbrado"
+                        style="padding:5px 15px;font-size:.9em;">Alumbrado</button>
+                </div>
+                <div style="margin-bottom:15px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span style="font-size:.8rem;font-weight:600;color:#666;align-self:center;">Estado:</span>
+                    <button class="btn btn-primary" data-filter-estado="all"
+                        style="padding:5px 15px;font-size:.9em;">Todos</button>
+                    <button class="btn btn-secondary" data-filter-estado="pendiente"
+                        style="padding:5px 15px;font-size:.9em;">Pendiente</button>
+                    <button class="btn btn-secondary" data-filter-estado="en proceso"
+                        style="padding:5px 15px;font-size:.9em;">En Proceso</button>
+                    <button class="btn btn-secondary" data-filter-estado="resuelto"
+                        style="padding:5px 15px;font-size:.9em;">Resuelto</button>
                 </div>
                 <table class="activity-table">
                     <thead>
@@ -130,6 +249,66 @@
             </div>
 
         </main>
+    </div>
+
+    <!-- ── Modal Nuevo / Editar Reporte ── -->
+    <div id="rep-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="rep-modal-title">Nuevo Reporte</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-grid">
+                <div class="field-group">
+                    <label for="rep-tipo">📌 Tipo de Reporte <span style="color:#e74c3c">*</span></label>
+                    <select id="rep-tipo">
+                        <option value="">-- Seleccione --</option>
+                        <option value="infraestructura">Infraestructura (baches, aceras)</option>
+                        <option value="seguridad">Seguridad</option>
+                        <option value="limpieza">Limpieza y Ornato</option>
+                        <option value="alumbrado">Alumbrado Público</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label for="rep-prioridad">🔥 Prioridad</label>
+                    <select id="rep-prioridad">
+                        <option value="baja">Baja</option>
+                        <option value="media" selected>Media</option>
+                        <option value="alta">Alta</option>
+                        <option value="critica">Crítica</option>
+                    </select>
+                </div>
+                <div class="field-group full">
+                    <label for="rep-ubicacion">📍 Ubicación Exacta <span style="color:#e74c3c">*</span></label>
+                    <input type="text" id="rep-ubicacion" placeholder="Ej: Frente a la escuela central, San Rafael"
+                        maxlength="150">
+                </div>
+                <div class="field-group full">
+                    <label for="rep-descripcion">📝 Descripción</label>
+                    <textarea id="rep-descripcion" rows="3" maxlength="500"
+                        placeholder="Detalle el problema reportado..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label for="rep-nombre">👤 Reportado por <span style="color:#e74c3c">*</span></label>
+                    <input type="text" id="rep-nombre" placeholder="Nombre del ciudadano" maxlength="80">
+                </div>
+                <div class="field-group">
+                    <label for="rep-estado">📊 Estado</label>
+                    <select id="rep-estado">
+                        <option value="pendiente">⏳ Pendiente</option>
+                        <option value="en proceso">🔄 En Proceso</option>
+                        <option value="resuelto">✅ Resuelto</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="btn btn-primary" id="rep-btn-guardar" onclick="saveReport()">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="../js/reports.js"></script>

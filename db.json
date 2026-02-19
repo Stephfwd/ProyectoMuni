@@ -33,6 +33,22 @@
       "password": "is1221",
       "rol": "ciudadano",
       "estado": "activo"
+    },
+    {
+      "id": "08dc",
+      "nombre": "Grrson",
+      "email": "Ger@gmail.com",
+      "password": "12345678",
+      "rol": "ciudadano",
+      "estado": "activo"
+    },
+    {
+      "id": "13f7",
+      "nombre": "Steven Salas",
+      "email": "salas@gamil.com",
+      "password": "12345678",
+      "rol": "ciudadano",
+      "estado": "activo"
     }
   ],
   "reportes": [
@@ -87,17 +103,7 @@
       "estado": "pendiente"
     }
   ],
-  "proyectos": [
-    {
-      "id": "8225",
-      "titulo": "gfhrtgesgest",
-      "tipo": "Seguridad",
-      "descripcion": "gsergesgergewgewgewrwgewgwe",
-      "contacto": "fewqe",
-      "fecha": "2026-02-19",
-      "estado": "pendiente"
-    }
-  ],
+  "proyectos": [],
   "citas": [
     {
       "id": "2",
