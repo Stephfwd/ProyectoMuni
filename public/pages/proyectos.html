@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Proyecto - Municipalidad de Escazú</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Main Content -->
+        <main class="main-content" style="margin-left: 0; width: 100%; max-width: 800px; margin: 2rem auto;">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Propuesta de Proyecto</h1>
+                    <p class="dashboard-date">Comparta su idea para mejorar el cantón.</p>
+                </div>
+                <div>
+                    <a href="index.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al
+                        Inicio</a>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <form id="proyectoForm">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <label for="titulo" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Título
+                                del Proyecto</label>
+                            <input type="text" id="titulo" name="titulo" required
+                                placeholder="Ej: Mejora de iluminación en Calle A" minlength="5" maxlength="100"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label for="tipo" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Tipo de
+                                Proyecto</label>
+                            <select id="tipo" name="tipo" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="">-- Seleccione una categoría --</option>
+                                <option value="Infraestructura">Infraestructura</option>
+                                <option value="Seguridad">Seguridad</option>
+                                <option value="Medio Ambiente">Medio Ambiente</option>
+                                <option value="Cultura">Cultura y Deporte</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="descripcion"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Descripción
+                                Detallada</label>
+                            <textarea id="descripcion" name="descripcion" rows="5" required
+                                placeholder="Explique su propuesta, beneficios y ubicación aproximada..." minlength="20"
+                                maxlength="1000"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+                            <small style="color: #888;" id="desc-counter">0 / 1000 caracteres</small>
+                        </div>
+                        <div>
+                            <label for="contacto"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Información de
+                                Contacto</label>
+                            <input type="text" id="contacto" name="contacto" required placeholder="Nombre o Teléfono"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; padding-top: 1.5rem; text-align: right;">
+                        <a href="index.html" class="btn btn-secondary" style="margin-right: 0.5rem;">Cancelar</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar
+                            Propuesta</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="../js/proyectos.js"></script>
+    <script>
+        const desc = document.getElementById('descripcion');
+        const counter = document.getElementById('desc-counter');
+        desc.addEventListener('input', () => {
+            counter.textContent = `${desc.value.length} / 1000 caracteres`;
+        });
+    </script>
+</body>
+
+</html>

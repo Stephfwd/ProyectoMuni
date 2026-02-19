@@ -102,15 +102,15 @@ export async function getUsuarios() {
     try {
 
         const respuestaServidor = await fetch(`${API_URL}/users`)
-      
-        
-        const datosUsuarios= await respuestaServidor.json();
-   
-        
+
+
+        const datosUsuarios = await respuestaServidor.json();
+
+
         return datosUsuarios;
-        
+
     } catch (error) {
-        
+
         console.error("Error al obtener los usuarios", error);
     }
 
@@ -144,6 +144,25 @@ export async function deleteUsuarios(id) {
         return datosUsuarios;
     } catch (error) {
         console.error("Error al Eliminar el registro", error);
+        throw error;
+    }
+}
+
+// Proyectos
+export async function postProyecto(proyecto) {
+    try {
+        const response = await fetch(`${API_URL}/proyectos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(proyecto)
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error al enviar proyecto:", error);
         throw error;
     }
 }

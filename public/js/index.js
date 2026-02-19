@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 5. Animaciones de Revelado (Intersection Observer)
-    const revealElements = document.querySelectorAll('.card, .news-item, .section-title');
+    const revealElements = document.querySelectorAll('.card, .large-card, .news-item, .section-title');
     const observerOptions = {
         threshold: 0.15
     };
