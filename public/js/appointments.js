@@ -20,6 +20,7 @@ async function loadAppointments() {
                 <td>${app.hora}</td>
                 <td>${app.ciudadano}</td>
                 <td>${app.tramite}</td>
+                <td><span class="badge" style="text-transform: capitalize;">${app.categoria || 'otro'}</span></td>
                 <td><span class="status ${app.estado === 'confirmada' ? 'active' : 'closed'}">${app.estado === 'confirmada' ? 'Confirmada' : 'Cancelada'}</span></td>
                 <td>
                     ${app.estado === 'confirmada' ?
@@ -96,10 +97,12 @@ window.viewAppointmentDetails = async function (id) {
             html: `
                 <div style="text-align: left; line-height: 1.6;">
                     <p><strong>Ciudadano:</strong> ${app.ciudadano}</p>
+                    <p><strong>Departamento:</strong> ${app.departamento || 'No especificado'}</p>
                     <p><strong>Trámite:</strong> ${app.tramite}</p>
-                    <p><strong>Fecha:</strong> ${app.fecha}</p>
-                    <p><strong>Hora:</strong> ${app.hora}</p>
-                    <p><strong>Notas:</strong> ${app.notas || 'N/A'}</p>
+                    <p><strong>Categoría:</strong> <span style="text-transform: capitalize;">${app.categoria || 'Otro'}</span></p>
+                    <p><strong>Prioridad:</strong> <span style="color: ${app.prioridad === 'alta' ? 'red' : 'inherit'}; text-transform: capitalize;">${app.prioridad || 'Media'}</span></p>
+                    <p><strong>Fecha/Hora:</strong> ${app.fecha} ${app.hora}</p>
+                    <p><strong>Notas:</strong> ${app.notas || 'Sin notas'}</p>
                     <p><strong>Estado:</strong> ${app.estado === 'confirmada' ? 'Confirmada' : 'Cancelada'}</p>
                 </div>
             `,

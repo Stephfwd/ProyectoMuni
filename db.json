@@ -49,14 +49,6 @@
       "password": "12345678",
       "rol": "ciudadano",
       "estado": "activo"
-    },
-    {
-      "id": "a55c",
-      "nombre": "Pepito Juan",
-      "email": "pjuan@gmail.com",
-      "password": "pjuan123",
-      "rol": "ciudadano",
-      "estado": "activo"
     }
   ],
   "reportes": [
@@ -137,15 +129,6 @@
     }
   ],
   "citas": [
-    {
-      "id": "1",
-      "ciudadano": "Juan Pérez",
-      "tramite": "Licencia de Construcción",
-      "fecha": "2026-02-18",
-      "hora": "09:00",
-      "notas": "Traer planos impresos",
-      "estado": "cancelada"
-    },
     {
       "id": "2",
       "ciudadano": "María López",

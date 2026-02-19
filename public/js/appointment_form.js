@@ -4,18 +4,24 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
     e.preventDefault();
 
     const ciudadano = document.getElementById('ciudadano').value;
+    const categoria = document.getElementById('categoria').value;
     const tramite = document.getElementById('tramite').value;
+    const prioridad = document.getElementById('prioridad').value;
+    const departamento = document.getElementById('departamento').value;
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
     const notas = document.getElementById('notas').value;
 
     const newAppointment = {
         ciudadano,
+        categoria,
         tramite,
+        prioridad,
+        departamento,
         fecha,
         hora,
         notas,
-        estado: 'confirmada' // Coincide con la estructura de db.json
+        estado: 'confirmada'
     };
 
     try {
