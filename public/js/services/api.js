@@ -1,21 +1,6 @@
 // Base URL for the API
 const API_URL = "http://localhost:3002";
 
-// Usuarios
-export async function getUsuarios() {
-    try {
-        const respuestaServidor = await fetch(`${API_URL}/users`, {
-            method: "GET"
-        });
-        if (!respuestaServidor.ok) throw new Error(`HTTP error! status: ${respuestaServidor.status}`);
-        const datosUsuarios = await respuestaServidor.json();
-        return datosUsuarios;
-    } catch (error) {
-        console.error("Error al obtener los usuarios", error);
-        throw error;
-    }
-}
-
 export async function postUsuarios(usuario) {
     try {
         const respuesta = await fetch(`${API_URL}/users`, { // Note: endpoint changed to /users matching previous usage
@@ -110,6 +95,28 @@ export async function loginUser(email, password) {
         throw error;
     }
 }
+
+
+export async function getUsuarios() {
+
+    try {
+
+        const respuestaServidor = await fetch(`${API_URL}/users`)
+      
+        
+        const datosUsuarios= await respuestaServidor.json();
+   
+        
+        return datosUsuarios;
+        
+    } catch (error) {
+        
+        console.error("Error al obtener los usuarios", error);
+    }
+
+
+}
+
 
 // Check email availability (for registration)
 export async function checkEmailAvailability(email) {
