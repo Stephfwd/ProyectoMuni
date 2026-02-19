@@ -61,23 +61,47 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                         <div>
                             <label for="ciudadano"
-                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Ciudadano</label>
-                            <input type="text" id="ciudadano" name="ciudadano" required
-                                placeholder="Nombre completo del ciudadano" minlength="3" maxlength="80"
-                                title="Mínimo 3 caracteres"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Ciudadano /
+                                Responsable</label>
+                            <input type="text" id="ciudadano" name="ciudadano" required placeholder="Nombre completo"
+                                minlength="3" maxlength="80"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div>
+                            <label for="categoria"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Categoría</label>
+                            <select id="categoria" name="categoria" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="">-- Seleccione una categoría --</option>
+                                <option value="social">Social</option>
+                                <option value="tramite">Trámites</option>
+                                <option value="mantenimiento">Mantenimiento</option>
+                                <option value="urgencia">Urgencias</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="tramite" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Tipo
-                                de Trámite</label>
+                                de Actividad / Trámite</label>
                             <select id="tramite" name="tramite" required
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
-                                <option value="">-- Seleccione un trámite --</option>
+                                <option value="">-- Seleccione un tipo --</option>
                                 <option value="Permiso de Construcción">Permiso de Construcción</option>
                                 <option value="Pago de Impuestos">Pago de Impuestos</option>
                                 <option value="Solicitud de Patente">Solicitud de Patente</option>
-                                <option value="Consulta Catastral">Consulta Catastral</option>
+                                <option value="Asamblea Comunal">Asamblea Comunal</option>
+                                <option value="Reparación de Vía">Reparación de Vía</option>
                                 <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="prioridad"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Prioridad</label>
+                            <select id="prioridad" name="prioridad" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                                <option value="baja">Baja</option>
+                                <option value="media" selected>Media</option>
+                                <option value="alta">Alta</option>
                             </select>
                         </div>
                         <div>
@@ -104,14 +128,15 @@
                             <label for="hora"
                                 style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Hora</label>
                             <input type="time" id="hora" name="hora" required min="07:00" max="17:00"
-                                title="Horario de atención: 7:00 AM a 5:00 PM"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div>
+                            <!-- Espacio para mantener el grid alineado -->
                         </div>
                         <div style="grid-column: span 2;">
                             <label for="notas" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Notas
                                 Adicionales</label>
-                            <textarea id="notas" name="notas" rows="3" placeholder="Detalles extra sobre la cita..."
-                                maxlength="300"
+                            <textarea id="notas" name="notas" rows="3" placeholder="Detalles extra..." maxlength="300"
                                 style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
                             <small style="color: #888;" id="notas-counter">0 / 300 caracteres</small>
                         </div>

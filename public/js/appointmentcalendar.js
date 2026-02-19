@@ -1,3 +1,5 @@
+import { getCitas } from './services/api.js';
+
 const calendarGrid = document.getElementById('calendarGrid');
 const calendarTitle = document.getElementById('calendarTitle');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -5,7 +7,7 @@ const nextMonthBtn = document.getElementById('nextMonth');
 
 let currentDate = new Date();
 
-function renderCalendar() {
+async function renderCalendar() {
     calendarGrid.innerHTML = '';
 
     // Headers
@@ -32,7 +34,12 @@ function renderCalendar() {
         calendarGrid.appendChild(emptyDay);
     }
 
-    const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+    let appointments = [];
+    try {
+        appointments = await getCitas();
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
 
     // Fill days with numbers and appointments
     for (let day = 1; day <= lastDate; day++) {
@@ -44,13 +51,34 @@ function renderCalendar() {
         dayElement.innerHTML = `<span class="day-number">${day}</span>`;
 
         // Filter appointments for this day
-        const dayAppointments = appointments.filter(app => app.fecha === dateStr && app.status === 'active');
+        const dayAppointments = appointments.filter(app => app.fecha === dateStr && app.estado !== 'cancelada');
 
         dayAppointments.forEach(app => {
             const event = document.createElement('div');
-            event.className = 'calendar-event';
+            const categoryClass = `event-${app.categoria || 'otro'}`;
+            event.className = `calendar-event ${categoryClass}`;
             event.textContent = `${app.hora} - ${app.ciudadano}`;
-            event.title = `${app.tramite}: ${app.notas || 'Sin notas'}`;
+
+            event.onclick = () => {
+                Swal.fire({
+                    title: app.tramite,
+                    html: `
+                        <div style="text-align: left; font-size: 0.9rem;">
+                            <p><strong>Responsable:</strong> ${app.ciudadano}</p>
+                            <p><strong>Departamento:</strong> ${app.departamento || 'No especificado'}</p>
+                            <p><strong>Fecha/Hora:</strong> ${app.fecha} ${app.hora}</p>
+                            <p><strong>Categoría:</strong> <span class="badge" style="text-transform: capitalize;">${app.categoria || 'Otro'}</span></p>
+                            <p><strong>Prioridad:</strong> <span style="color: ${app.prioridad === 'alta' ? 'red' : 'inherit'}; text-transform: capitalize;">${app.prioridad || 'Media'}</span></p>
+                            <hr>
+                            <p><strong>Notas:</strong><br>${app.notas || 'Sin notas adicionales'}</p>
+                        </div>
+                    `,
+                    icon: 'info',
+                    confirmButtonText: 'Cerrar',
+                    confirmButtonColor: '#2b5a9e'
+                });
+            };
+
             dayElement.appendChild(event);
         });
 

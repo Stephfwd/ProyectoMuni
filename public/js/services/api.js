@@ -79,6 +79,17 @@ export async function postReporte(reporte) {
 }
 
 // Citas
+export async function getCitas() {
+    try {
+        const response = await fetch(`${API_URL}/citas`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error al obtener las citas:", error);
+        throw error;
+    }
+}
+
 export async function postCita(cita) {
     try {
         const response = await fetch(`${API_URL}/citas`, {
@@ -92,7 +103,37 @@ export async function postCita(cita) {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         return await response.json();
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al crear cita:", error);
+        throw error;
+    }
+}
+
+export async function putCita(id, cita) {
+    try {
+        const response = await fetch(`${API_URL}/citas/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cita)
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error al actualizar cita:", error);
+        throw error;
+    }
+}
+
+export async function deleteCita(id) {
+    try {
+        const response = await fetch(`${API_URL}/citas/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Error al eliminar cita:", error);
         throw error;
     }
 }

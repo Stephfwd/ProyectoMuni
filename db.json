@@ -33,6 +33,30 @@
       "password": "is1221",
       "rol": "ciudadano",
       "estado": "activo"
+    },
+    {
+      "id": "c679",
+      "nombre": "Steven Gomez",
+      "email": "steven@gmail.com",
+      "password": "123456",
+      "rol": "ciudadano",
+      "estado": "activo"
+    },
+    {
+      "id": "f70b",
+      "nombre": "Nasling Porras",
+      "email": "nasling@gmail.com",
+      "password": "12345678",
+      "rol": "ciudadano",
+      "estado": "activo"
+    },
+    {
+      "id": "bf27",
+      "nombre": "Juan Mora",
+      "email": "juan@gmail.com",
+      "password": "12345678",
+      "rol": "ciudadano",
+      "estado": "activo"
     }
   ],
   "reportes": [
@@ -79,15 +103,6 @@
   ],
   "proyectos": [],
   "citas": [
-    {
-      "id": "1",
-      "ciudadano": "Juan Pérez",
-      "tramite": "Licencia de Construcción",
-      "fecha": "2026-02-18",
-      "hora": "09:00",
-      "notas": "Traer planos impresos",
-      "estado": "cancelada"
-    },
     {
       "id": "2",
       "ciudadano": "María López",
