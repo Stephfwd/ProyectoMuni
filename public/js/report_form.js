@@ -12,12 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
 
+        const tipo = document.getElementById('tipo').value.trim();
+        const ubicacion = document.getElementById('ubicacion').value.trim();
+        const descripcion = document.getElementById('descripcion').value.trim();
+        const reportado_por = document.getElementById('reportado_por').value.trim();
+        const prioridad = document.getElementById('prioridad').value.trim();
+
+        if (!tipo || !ubicacion || !descripcion || !reportado_por || !prioridad) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos vacíos',
+                text: 'Por favor complete todos los campos y evite usar solo espacios.'
+            });
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Registrar Reporte';
+            return;
+        }
+
         const newReport = {
-            tipo: document.getElementById('tipo').value,
-            ubicacion: document.getElementById('ubicacion').value,
-            descripcion: document.getElementById('descripcion').value,
-            reportado_por: document.getElementById('reportado_por').value,
-            prioridad: document.getElementById('prioridad').value,
+            tipo,
+            ubicacion,
+            descripcion,
+            reportado_por,
+            prioridad,
             fecha: new Date().toISOString().split('T')[0],
             estado: 'pendiente'
         };

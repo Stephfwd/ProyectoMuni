@@ -3,8 +3,17 @@ import { loginUser } from './services/api.js';
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacíos',
+            text: 'Por favor, complete todos los campos y evite usar solo espacios en blanco.'
+        });
+        return;
+    }
 
     try {
         // Fetch users from the database using imported service

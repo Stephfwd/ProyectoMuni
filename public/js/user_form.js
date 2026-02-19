@@ -12,18 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
 
+        const nombre = document.getElementById('nombre').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const rol = document.getElementById('rol').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const estado = document.getElementById('estado').value.trim();
+
+        if (!nombre || !email || !telefono || !rol || !password || !estado) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos vacíos',
+                text: 'Todos los campos son obligatorios y no pueden contener solo espacios.'
+            });
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Usuario';
+            return;
+        }
+
         const newUser = {
-            nombre: document.getElementById('nombre').value,
-            email: document.getElementById('email').value,
-            telefono: document.getElementById('telefono').value,
-            rol: document.getElementById('rol').value,
-            password: document.getElementById('password').value,
-            estado: document.getElementById('estado').value,
+            nombre,
+            email,
+            telefono,
+            rol,
+            password,
+            estado,
             fecha_registro: new Date().toISOString().split('T')[0]
         };
 
         try {
-            // Check if email already exists
             const checkRes = await fetch(`${API_URL}/users?email=${encodeURIComponent(newUser.email)}`);
             const existing = await checkRes.json();
             if (existing.length > 0) {

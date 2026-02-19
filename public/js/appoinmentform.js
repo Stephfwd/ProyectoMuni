@@ -3,11 +3,20 @@ import { postCita } from './services/api.js';
 document.getElementById('appointmentForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const ciudadano = document.getElementById('ciudadano').value;
-    const tramite = document.getElementById('tramite').value;
-    const fecha = document.getElementById('fecha').value;
-    const hora = document.getElementById('hora').value;
-    const notas = document.getElementById('notas').value;
+    const ciudadano = document.getElementById('ciudadano').value.trim();
+    const tramite = document.getElementById('tramite').value.trim();
+    const fecha = document.getElementById('fecha').value.trim();
+    const hora = document.getElementById('hora').value.trim();
+    const notas = document.getElementById('notas').value.trim();
+
+    if (!ciudadano || !tramite || !fecha || !hora || !notas) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacíos',
+            text: 'Todos los campos son obligatorios y no pueden contener solo espacios.'
+        });
+        return;
+    }
 
     const newAppointment = {
         ciudadano,

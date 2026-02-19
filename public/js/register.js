@@ -3,10 +3,19 @@ import { postUsuarios, checkEmailAvailability } from './services/api.js';
 document.getElementById('registerForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const fullname = document.getElementById('fullname').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+    if (!fullname || !email || !password || !confirmPassword) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacíos',
+            text: 'Todos los campos son obligatorios y no pueden contener solo espacios.'
+        });
+        return;
+    }
 
     // Validación básica
     if (password !== confirmPassword) {

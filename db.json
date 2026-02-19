@@ -54,7 +54,7 @@
       "reportado_por": "23344567",
       "prioridad": "media",
       "fecha": "2026-02-18",
-      "estado": "cerrado"
+      "estado": "pendiente"
     },
     {
       "id": "a1d5",
@@ -62,6 +62,16 @@
       "ubicacion": "                      ",
       "descripcion": "                     ",
       "reportado_por": "   ",
+      "prioridad": "media",
+      "fecha": "2026-02-18",
+      "estado": "pendiente"
+    },
+    {
+      "id": "73af",
+      "tipo": "seguridad",
+      "ubicacion": "      ",
+      "descripcion": "            ",
+      "reportado_por": "    ",
       "prioridad": "media",
       "fecha": "2026-02-18",
       "estado": "pendiente"
@@ -76,7 +86,7 @@
       "fecha": "2026-02-18",
       "hora": "09:00",
       "notas": "Traer planos impresos",
-      "estado": "confirmada"
+      "estado": "cancelada"
     },
     {
       "id": "2",
