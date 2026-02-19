@@ -75,9 +75,29 @@
       "prioridad": "media",
       "fecha": "2026-02-18",
       "estado": "pendiente"
+    },
+    {
+      "id": "2aa2",
+      "tipo": "Alumbrado Público",
+      "ubicacion": "gghnsrgthe65u",
+      "descripcion": "setghestghsetestgestg",
+      "reportado_por": "Usuario Ciudadano",
+      "prioridad": "media",
+      "fecha": "2026-02-19",
+      "estado": "pendiente"
     }
   ],
-  "proyectos": [],
+  "proyectos": [
+    {
+      "id": "8225",
+      "titulo": "gfhrtgesgest",
+      "tipo": "Seguridad",
+      "descripcion": "gsergesgergewgewgewrwgewgwe",
+      "contacto": "fewqe",
+      "fecha": "2026-02-19",
+      "estado": "pendiente"
+    }
+  ],
   "citas": [
     {
       "id": "2",
