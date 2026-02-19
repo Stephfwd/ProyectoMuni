@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Públicos - Panel Administrativo</title>
+    <title>Proyectos Viales - Panel Administrativo</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -26,7 +26,7 @@
             border-radius: 12px;
             padding: 2rem;
             width: 100%;
-            max-width: 620px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
@@ -139,8 +139,8 @@
                 <a href="reports.html"><i class="fas fa-file-alt"></i> Reportes</a>
                 <a href="appointments.html"><i class="fas fa-calendar-check"></i> Citas</a>
                 <a href="financiamiento.html"><i class="fas fa-hand-holding-usd"></i> Financiamientos</a>
-                <a href="proyectos_viales.html"><i class="fas fa-road"></i> Proyectos Viales</a>
-                <a href="servicios_publicos.html" class="active"><i class="fas fa-tools"></i> Servicios Públicos</a>
+                <a href="proyectos_viales.html" class="active"><i class="fas fa-road"></i> Proyectos Viales</a>
+                <a href="servicios_publicos.html"><i class="fas fa-tools"></i> Servicios Públicos</a>
                 <a href="settings.html"><i class="fas fa-cog"></i> Configuración</a>
             </nav>
             <div class="sidebar-footer">
@@ -161,12 +161,12 @@
         <main class="main-content">
             <div class="dashboard-header">
                 <div>
-                    <h1>Servicios Públicos</h1>
-                    <p class="dashboard-date">Gestión de servicios ofrecidos a la ciudadanía por la municipalidad.</p>
+                    <h1>Proyectos Viales</h1>
+                    <p class="dashboard-date">Administración de proyectos de infraestructura vial municipal.</p>
                 </div>
                 <div>
                     <button class="btn btn-primary" onclick="openModal()">
-                        <i class="fas fa-plus"></i> Nuevo Servicio
+                        <i class="fas fa-plus"></i> Nuevo Proyecto
                     </button>
                 </div>
             </div>
@@ -175,112 +175,112 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3 id="sp-total">0</h3>
-                        <p>Total Servicios</p>
+                        <h3 id="pv-total">0</h3>
+                        <p>Total Proyectos</p>
                     </div>
-                    <div class="stat-icon users"><i class="fas fa-concierge-bell"></i></div>
+                    <div class="stat-icon users"><i class="fas fa-road"></i></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3 id="sp-activos">0</h3>
-                        <p>Activos</p>
+                        <h3 id="pv-en-proceso">0</h3>
+                        <p>En Ejecución</p>
                     </div>
-                    <div class="stat-icon tasks"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-icon tasks"><i class="fas fa-hard-hat"></i></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3 id="sp-mantenimiento">0</h3>
-                        <p>En Mantenimiento</p>
+                        <h3 id="pv-completados">0</h3>
+                        <p>Completados</p>
                     </div>
-                    <div class="stat-icon reports"><i class="fas fa-wrench"></i></div>
+                    <div class="stat-icon reports"><i class="fas fa-check-double"></i></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-info">
-                        <h3 id="sp-inactivos">0</h3>
-                        <p>Inactivos</p>
+                        <h3 id="pv-presupuesto-total">₡ 0</h3>
+                        <p>Presupuesto Total</p>
                     </div>
-                    <div class="stat-icon growth"><i class="fas fa-pause-circle"></i></div>
+                    <div class="stat-icon growth"><i class="fas fa-coins"></i></div>
                 </div>
             </div>
 
             <!-- Tabla -->
             <div class="recent-activity">
-                <h2>Lista de Servicios</h2>
+                <h2>Lista de Proyectos</h2>
+                <div style="margin-bottom:1rem;display:flex;gap:.6rem;flex-wrap:wrap;">
+                    <button class="btn btn-primary" data-filter-pv="all"
+                        style="padding:5px 14px;font-size:.88em;">Todos</button>
+                    <button class="btn btn-secondary" data-filter-pv="pendiente"
+                        style="padding:5px 14px;font-size:.88em;">Pendientes</button>
+                    <button class="btn btn-secondary" data-filter-pv="en proceso"
+                        style="padding:5px 14px;font-size:.88em;">En Proceso</button>
+                    <button class="btn btn-secondary" data-filter-pv="completado"
+                        style="padding:5px 14px;font-size:.88em;">Completados</button>
+                    <button class="btn btn-secondary" data-filter-pv="cancelado"
+                        style="padding:5px 14px;font-size:.88em;">Cancelados</button>
+                </div>
                 <table class="activity-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Categoría</th>
                             <th>Descripción</th>
-                            <th>Responsable</th>
+                            <th>Presupuesto</th>
+                            <th>Fecha Inicio</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="sp-table-body"></tbody>
+                    <tbody id="pv-table-body"></tbody>
                 </table>
             </div>
         </main>
     </div>
 
     <!-- Modal -->
-    <div id="sp-modal" class="modal-overlay">
+    <div id="pv-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-header">
-                <h2 id="sp-modal-title">Nuevo Servicio Público</h2>
+                <h2 id="pv-modal-title">Nuevo Proyecto Vial</h2>
                 <button class="modal-close" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-grid">
-                <div class="field-group">
-                    <label for="sp-nombre">💡 Nombre del Servicio <span style="color:#e74c3c">*</span></label>
-                    <input type="text" id="sp-nombre" placeholder="Ej: Recolección de Basura" maxlength="100">
-                </div>
-                <div class="field-group">
-                    <label for="sp-categoria">📂 Categoría <span style="color:#e74c3c">*</span></label>
-                    <select id="sp-categoria">
-                        <option value="">-- Seleccione --</option>
-                        <option value="saneamiento">Saneamiento</option>
-                        <option value="alumbrado">Alumbrado Público</option>
-                        <option value="aguas">Aguas y Alcantarillado</option>
-                        <option value="vialidad">Vialidad</option>
-                        <option value="parques">Parques y Zonas Verdes</option>
-                        <option value="seguridad">Seguridad</option>
-                        <option value="otro">Otro</option>
-                    </select>
+                <div class="field-group full">
+                    <label for="pv-nombre">🛣 Nombre del Proyecto <span style="color:#e74c3c">*</span></label>
+                    <input type="text" id="pv-nombre" placeholder="Ej: Repavimentación Ruta 27 tramo Escazú"
+                        maxlength="120">
                 </div>
                 <div class="field-group full">
-                    <label for="sp-descripcion">📝 Descripción</label>
-                    <textarea id="sp-descripcion" rows="3" maxlength="400"
-                        placeholder="Detalle del servicio, cobertura, horario..."></textarea>
+                    <label for="pv-descripcion">📝 Descripción</label>
+                    <textarea id="pv-descripcion" rows="3" maxlength="500"
+                        placeholder="Alcance, objetivos y detalles del proyecto..."></textarea>
                 </div>
                 <div class="field-group">
-                    <label for="sp-responsable">👤 Responsable / Departamento</label>
-                    <input type="text" id="sp-responsable" placeholder="Ej: Dpto. de Servicios Ambientales"
-                        maxlength="80">
+                    <label for="pv-presupuesto">💰 Presupuesto (₡) <span style="color:#e74c3c">*</span></label>
+                    <input type="number" id="pv-presupuesto" placeholder="0" min="0" step="10000">
                 </div>
                 <div class="field-group">
-                    <label for="sp-telefono">📞 Teléfono de Contacto</label>
-                    <input type="tel" id="sp-telefono" placeholder="Ej: 2208-7500" maxlength="15">
+                    <label for="pv-fecha">📅 Fecha de Inicio <span style="color:#e74c3c">*</span></label>
+                    <input type="date" id="pv-fecha">
                 </div>
                 <div class="field-group full">
-                    <label for="sp-estado">📊 Estado</label>
-                    <select id="sp-estado">
-                        <option value="activo">✅ Activo</option>
-                        <option value="mantenimiento">🔧 En Mantenimiento</option>
-                        <option value="inactivo">⛔ Inactivo</option>
+                    <label for="pv-estado">📊 Estado</label>
+                    <select id="pv-estado">
+                        <option value="pendiente">⏳ Pendiente</option>
+                        <option value="en proceso">🔧 En Proceso</option>
+                        <option value="completado">✅ Completado</option>
+                        <option value="cancelado">❌ Cancelado</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="closeModal()"><i class="fas fa-times"></i> Cancelar</button>
-                <button class="btn btn-primary" id="sp-btn-guardar" onclick="saveServicio()">
+                <button class="btn btn-primary" id="pv-btn-guardar" onclick="saveProyecto()">
                     <i class="fas fa-save"></i> Guardar
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="../js/servicios_publicos.js"></script>
+    <script src="../js/proyectos_viales.js"></script>
 </body>
 
 </html>

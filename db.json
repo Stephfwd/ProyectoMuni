@@ -49,6 +49,14 @@
       "password": "12345678",
       "rol": "ciudadano",
       "estado": "activo"
+    },
+    {
+      "id": "a55c",
+      "nombre": "Pepito Juan",
+      "email": "pjuan@gmail.com",
+      "password": "pjuan123",
+      "rol": "ciudadano",
+      "estado": "activo"
     }
   ],
   "reportes": [
@@ -94,6 +102,40 @@
     }
   ],
   "proyectos": [],
+  "financiamientos": [
+    {
+      "id": "cf95",
+      "nombre_proyecto": "djdjdjdjd",
+      "descripcion": "kosjdoijidjiodjiodjs",
+      "monto_solicitado": 133,
+      "monto_aprobado": 214343,
+      "entidad_financiera": "bp",
+      "fecha_solicitud": "2026-02-20",
+      "fecha_aprobacion": "2026-02-24",
+      "estado": "pendiente"
+    }
+  ],
+  "proyectos_viales": [
+    {
+      "id": "a621",
+      "nombre": "repdimad",
+      "descripcion": "kidjoid",
+      "presupuesto": 1223,
+      "fecha_inicio": "2026-02-21",
+      "estado": "pendiente"
+    }
+  ],
+  "servicios_publicos": [
+    {
+      "id": "e238",
+      "nombre": "Recolección basura",
+      "categoria": "aguas",
+      "descripcion": "nsjninisnjcn",
+      "responsable": "jsjj",
+      "telefono": "22022727",
+      "estado": "activo"
+    }
+  ],
   "citas": [
     {
       "id": "1",
